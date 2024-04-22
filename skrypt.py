@@ -1,27 +1,32 @@
 import math
 import numpy as np
 import sys
+python skrypt input.txt output.txt
 class skoordynowane_transformacje:
     def __init__(self):
         pass
+# self- instancja klasy, input-plik wejsciowy, output-wyjsciowy plik
 def process_coordinates_file(self, input_file, output_file):
-    try:
-        with open(input_file, 'r') as f_input, open(output_file, 'w') as f_output:
-            for line in f_input:
-                # Rozdziel linię na poszczególne wartości
-                coordinates = line.strip().split()
-                
-                # Przelicz współrzędne XYZ na BLH
-                X, Y, Z = map(float, coordinates)
-                fi, lon, h = XYZ2flh(X, Y, Z)
-                
-                # Zapisz wyniki do pliku wyjściowego
-                f_output.write(f"{fi} {lon} {h}\n")
-        print("Pomyślnie przetworzono i zapisano wyniki do pliku:", output_file)
-    except FileNotFoundError:
-        print("Nie można odnaleźć pliku wejściowego:", input_file)
-    except Exception as e:
-        print("Wystąpił błąd podczas przetwarzania pliku:", str(e))
+    with open(input_file, 'r') as f:
+        lines = f.readlines()
+
+    output_lines = []
+    for line in lines:
+        coordinates = line.strip().split()
+        if len(coordinates) != 3:
+            print("Niepoprawna liczba współrzędnych w linii:", line)
+            continue
+        try:
+            X, Y, Z = map(float, coordinates)
+        except ValueError:
+            print("Niepoprawny format współrzędnych w linii:", line)
+            continue
+        fi, lon, h = self.XYZ2flh(X, Y, Z)
+        output_lines.append(f"{fi} {lon} {h}\n")
+
+    with open(output_file, 'w') as f:
+        f.writelines(output_lines)
+
         
 def XYZ2flh(X, Y, Z, a = 6378137,e2 = 0.00669438002290):
     """
@@ -62,19 +67,13 @@ def XYZ2flh(X, Y, Z, a = 6378137,e2 = 0.00669438002290):
     return(f,l,h)
 
 if __name__ == "__main__":
-    # Przykładowe wywołanie transformacji XYZ -> BLH
     transformer = skoordynowane_transformacje()
-    X = 4070605.089
-    Y = 931621.785
-    Z = 4801509.052
-    fi, lon, h = XYZ2flh(X, Y, Z)
-    print("Współrzędne geograficzne (fi, lambda, h):", fi, lon, h)
-
+    
     if len(sys.argv) != 3:
-        print("Sposób użycia: python main.py plik_wejsciowy.txt plik_wyjsciowy.txt")
+        print("źle")
         sys.exit(1)
-
+    
     input_file = sys.argv[1]
     output_file = sys.argv[2]
-
-    transformer.process_coordinates_file(input_file, output_file)
+    
+    transformer.process_coordinates_file(input_file,output_file)
