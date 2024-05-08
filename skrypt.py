@@ -500,8 +500,8 @@ class Transformacje:
             Z[i] = Transformacje.zamiana_float2string(self, Z[i])
         
         with open(xyz_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Wyniki_obliczen_Geodezyjnych; X, Y, Z, fi, lambda, h, x1992, y1992, x2000, y2000.\n")
-            plik.write(f"Znak '-' w koordynatach; x1992, y1992, x2000, y2000 oznacza, że dla podanych współrzędnych ortokartezjańskich (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie należą do dozwolonych współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
+            plik.write(f"Zestawienie_wyników_obliczeń_geodezyjnych; X, Y, Z, fi, lambda, h, x1992, y1992, x2000, y2000.\n")
+            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych punktów na pow. Ziemi; X1992, Y1992, X2000, Y2000 oznacza, to że dla podanych (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie są akceptowalne w standardowych układach współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
             plik.write("-"*221)
             plik.write(f"\n")
             plik.write(f"|          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
@@ -528,8 +528,8 @@ class Transformacje:
             
     def zamiana_float2string_rad(self, liczba):
         '''
-        zamienia z float na str z dokładnocia taką jaką musi mieć jednostka radiany. 
-        Zrobione jest to po to żeby wynik się ładnie zapisywał w pliku wynikowym 
+        Konwertuje liczby zmiennoprzecinkowe [float] na ciągi znaków [string], zachowując precyzję 
+        odpowiednią dla jednostki radianów. Celem jest estetyczne zapisanie wyników w pliku wyjściowym.
 
         Parameters
         ----------
@@ -553,8 +553,8 @@ class Transformacje:
     
     def zamiana_float2string_fl(self, liczba):
         '''
-        zamienia z float na str z dokładnocia taką jaką musi mieć jednostka stopnie dziesiętne. 
-        Zrobione jest to po to żeby wynik się ładnie zapisywał w pliku wynikowym 
+        Przekształca liczby zmiennoprzecinkowe [float] na ciągi znaków [string] z odpowiednią precyzją, 
+        zgodną z formatem stopni dziesiętnych. Cel jest taki, aby wyniki były czytelnie zapisane w pliku wynikowym.
 
         Parameters
         ----------
@@ -578,8 +578,9 @@ class Transformacje:
     
     def zamiana_float2string(self, liczba):
         '''
-        zamienia z float na str z dokładnocia taką jaką musi mieć jednostka dms. 
-        Zrobione jest to po to żeby wynik się ładnie zapisywał w pliku wynikowym 
+        Konwersja z liczb zmiennoprzecinkowych [float] na ciągi znaków [string] z dokładnością odpowiadającą 
+        wymogom formatu stopni, minut i sekund (dms). Proces ten ma na celu estetyczne zapisanie 
+        wyników w pliku wyjściowym.
 
         Parameters
         ----------
@@ -589,7 +590,7 @@ class Transformacje:
         Returns
         -------
         liczbe : STR
-            string z okreloną stała iloscia znaków
+            string z okreloną stała ilością znaków
 
 
         '''
@@ -603,18 +604,19 @@ class Transformacje:
     
     def zapis_danych_v2(self, xyz_txt, x, y, z, output = "dms"):
         '''
-        Zapisanie pliku txt z danych wprowadzanych do pliku Kalkulatora który przelicza na PL2000, PL1992 ,xyz i flh
+        Generowanie pliku tekstowego z danymi wprowadzanymi do narzędzia Kalkulatora, 
+        które przekształcają te dane na współrzędne geodezyjne w układach PL2000, PL1992, oraz formaty xyz i flh
 
         Parameters
         ----------
         xyz_txt : STR
             PLIK TXT
         X, Y, Z : FLOAT
-             [metry] - współrzędne w układzie orto-kartezjańskim,
+             [metry] - współrzędne w układzie ortokartezjańskim,
         f : FLOAT
              [stopnie dziesiętne] - szerokość geodezyjna.
         l : FLOAT
-             [stopnie dziesiętne] - długośc geodezyjna.
+             [stopnie dziesiętne] - długość geodezyjna.
         h : FLOAT
              [metry] - wysokość elipsoidalna
         X1992, Y1992 : FLOAT
@@ -661,8 +663,8 @@ class Transformacje:
         
         if not os.path.exists(xyz_txt):
             with open(xyz_txt, "w", encoding="utf-8") as plik:
-                plik.write(f"Wyniki_obliczen_Geodezyjnych; X, Y, Z, fi, lambda, h, x1992, y1992, x2000, y2000.\n")
-                plik.write(f"Znak '-' w koordynatach; x1992, y1992, x2000, y2000 oznacza, że dla podanych współrzędnych ortokartezjańskich (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie należą do dozwolonych współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
+                plik.write(f"Zestawienie_wyników_obliczeń_geodezyjnych; X, Y, Z, fi, lambda, h, X1992, Y1992, X2000, Y2000.\n")
+                plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych punktów na pow. Ziemi; X1992, Y1992, X2000, Y2000 oznacza, to że dla podanych (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie są akceptowalne w standardowych układach współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
                 plik.write("-"*221)
                 plik.write(f"\n")
                 plik.write(f"|          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
