@@ -426,3 +426,74 @@ def xyz2neu(self, f, l, xa, ya, za, xb, yb, zb):
             
     return(n, e, u)
     
+def wczytanie_pliku_z_zapisem(self, dane, output='dms' xyz_txt = 'wyniki_xyz_flh_x92y92_x20y20.txt', neu_txt= 'wyniki_neu.txt'):
+    with open(Dane, "r") as plik:
+        tab=np.genfromtxt(plik, delimiter=",", dtype = '<U20', skip_header = 4)
+        X=[]
+        Y=[]
+        Z=[]
+        for i in tab:
+            x=i[0]
+            X.append(float(x))
+            y=i[1]
+            Y.append(float(y))
+            z=i[2]
+            Z.append(float(z))
+        ilosc_wierszy = len(X)
+        F=[]
+        L=[]
+        H=[]
+        X92=[]
+        Y92=[]
+        X00=[]
+        Y00=[]
+        N=[]
+        E=[]
+        U=[]        
+     if output == "dms":
+            F.append(f)
+            L.append(l)
+        elif output == "radiany":
+            f=Transformacje.zamiana_float2string_rad(self,f)
+            l=Transformacje.zamiana_float2string_rad(self,l)
+            F.append(f)
+            L.append(l)
+        else:
+            f=Transformacje.zamiana_float2string_fl(self,f)
+            l=Transformacje.zamiana_float2string_fl(self,l)
+            F.append(f)
+            L.append(l)
+        H.append(Transformacje.zamiana_float2string(self, h))
+        f,l,h = Transformacje.hirvonen(self, x, y, z)
+        
+        if l >= 13.5 and l <= 25.5 and f <= 55.0 and f >= 48.9:
+            x92, y92 = Transformacje.flh2PL92(self, f,l)
+            X92.append(Transformacje.zamiana_float2string(self, x92))
+            Y92.append(Transformacje.zamiana_float2string(self, y92))
+            x00, y00 = Transformacje.flh2PL00(self, f,l)
+            X00.append(Transformacje.zamiana_float2string(self, x00))
+            Y00.append(Transformacje.zamiana_float2string(self, y00))
+        else:
+            x92 = "         '-'         " ; X92.append(x92)
+            y92 = "         '-'         " ; Y92.append(y92)
+            x00 = "         '-'         " ; X00.append(x00)
+            y00 = "         '-'         " ; Y00.append(y00)
+    
+    f1, l1, h1 = Transformacje.hirvonen(self, X[0], Y[0], Z[0])
+    n1, e1, u1 = Transformacje.xyz2neu(self, f1, l1, X[0], Y[0], Z[0], X[-1], Y[-1], Z[-1])
+    N.append(n1)
+    E.append(e1)
+    U.append(u1)
+    
+    i=0
+    while i<(ilosc_wierszy-1):
+        f, l, h = Transformacje.hirvonen(self, X[i], Y[i], Z[i])
+        n, e, u = Transformacje.xyz2neu(self, f, l, X[i], Y[i], Z[i], X[i+1], Y[i+1], Z[i+1])
+        N.append(n)
+        E.append(e)
+        U.append(u)
+        i+=1    
+            
+if __name__ == "__main__":
+    geo = Transformacje("GRS80")
+    geo.wczytanie_pliku_z_zapisem("input_file.txt")
