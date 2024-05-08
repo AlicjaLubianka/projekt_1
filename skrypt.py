@@ -415,93 +415,195 @@ class Transformacje:
         while xx < P:
             n = str(" ") + n
             xx += 1
-            
-<<<<<<< HEAD
-    while zz < P:
-        u = str(" ") + u
-        zz +=1
-            
-    return(n, e, u)
-    
-def wczytanie_pliku_z_zapisem(self, dane, output='dms' xyz_txt = 'wyniki_xyz_flh_x92y92_x20y20.txt', neu_txt= 'wyniki_neu.txt'):
-    with open(Dane, "r") as plik:
-        tab=np.genfromtxt(plik, delimiter=",", dtype = '<U20', skip_header = 4)
-        X=[]
-        Y=[]
-        Z=[]
-        for i in tab:
-            x=i[0]
-            X.append(float(x))
-            y=i[1]
-            Y.append(float(y))
-            z=i[2]
-            Z.append(float(z))
-        ilosc_wierszy = len(X)
-        F=[]
-        L=[]
-        H=[]
-        X92=[]
-        Y92=[]
-        X00=[]
-        Y00=[]
-        N=[]
-        E=[]
-        U=[]        
-     if output == "dms":
-            F.append(f)
-            L.append(l)
-        elif output == "radiany":
-            f=Transformacje.zamiana_float2string_rad(self,f)
-            l=Transformacje.zamiana_float2string_rad(self,l)
-            F.append(f)
-            L.append(l)
-        else:
-            f=Transformacje.zamiana_float2string_fl(self,f)
-            l=Transformacje.zamiana_float2string_fl(self,l)
-            F.append(f)
-            L.append(l)
-        H.append(Transformacje.zamiana_float2string(self, h))
-        f,l,h = Transformacje.hirvonen(self, x, y, z)
-        
-        if l >= 13.5 and l <= 25.5 and f <= 55.0 and f >= 48.9:
-            x92, y92 = Transformacje.flh2PL92(self, f,l)
-            X92.append(Transformacje.zamiana_float2string(self, x92))
-            Y92.append(Transformacje.zamiana_float2string(self, y92))
-            x00, y00 = Transformacje.flh2PL00(self, f,l)
-            X00.append(Transformacje.zamiana_float2string(self, x00))
-            Y00.append(Transformacje.zamiana_float2string(self, y00))
-        else:
-            x92 = "         '-'         " ; X92.append(x92)
-            y92 = "         '-'         " ; Y92.append(y92)
-            x00 = "         '-'         " ; X00.append(x00)
-            y00 = "         '-'         " ; Y00.append(y00)
-    
-    f1, l1, h1 = Transformacje.hirvonen(self, X[0], Y[0], Z[0])
-    n1, e1, u1 = Transformacje.xyz2neu(self, f1, l1, X[0], Y[0], Z[0], X[-1], Y[-1], Z[-1])
-    N.append(n1)
-    E.append(e1)
-    U.append(u1)
-    
-    i=0
-    while i<(ilosc_wierszy-1):
-        f, l, h = Transformacje.hirvonen(self, X[i], Y[i], Z[i])
-        n, e, u = Transformacje.xyz2neu(self, f, l, X[i], Y[i], Z[i], X[i+1], Y[i+1], Z[i+1])
-        N.append(n)
-        E.append(e)
-        U.append(u)
-        i+=1    
-            
-if __name__ == "__main__":
-    geo = Transformacje("GRS80")
-    geo.wczytanie_pliku_z_zapisem("input_file.txt")
-=======
         while yy < P:
             e = str(" ") + e
             yy += 1
-                
+                    
         while zz < P:
             u = str(" ") + u
             zz +=1
-        return(n, e, u)   
+        return(n, e, u) 
     
->>>>>>> 07c892709e86cfd9160d21de9fc8ace42cd0b221
+    def wczytanie_pliku_z_zapisem(self, dane, output='dms', xyz_txt = 'wyniki_xyz_flh_x92y92_x20y20.txt', neu_txt= 'wyniki_neu.txt'):
+        with open(dane, "r") as plik:
+            tab=np.genfromtxt(plik, delimiter=",", dtype = '<U20', skip_header = 4)
+            X=[]
+            Y=[]
+            Z=[]
+            for i in tab:
+                x=i[0]
+                X.append(float(x))
+                y=i[1]
+                Y.append(float(y))
+                z=i[2]
+                Z.append(float(z))
+            ilosc_wierszy = len(X)
+            F=[]
+            L=[]
+            H=[]
+            X92=[]
+            Y92=[]
+            X00=[]
+            Y00=[]
+            N=[]
+            E=[]
+            U=[]    
+        for x,y,z in zip (X,Y,Z):
+            f,l,h = Transformacje.hirvonen(self, x, y, z, output = output)
+            if output == "dms":
+                F.append(f)
+                L.append(l)
+            elif output == "radiany":
+                f=Transformacje.zamiana_float2string_rad(self,f)
+                l=Transformacje.zamiana_float2string_rad(self,l)
+                F.append(f)
+                L.append(l)
+            else:
+                f=Transformacje.zamiana_float2string_fl(self,f)
+                l=Transformacje.zamiana_float2string_fl(self,l)
+                F.append(f)
+                L.append(l)
+            H.append(Transformacje.zamiana_float2string(self, h))
+            f,l,h = Transformacje.hirvonen(self, x, y, z)
+            
+            if l >= 13.5 and l <= 25.5 and f <= 55.0 and f >= 48.9:
+                x92, y92 = Transformacje.flh2PL1992(self, f,l)
+                X92.append(Transformacje.zamiana_float2string(self, x92))
+                Y92.append(Transformacje.zamiana_float2string(self, y92))
+                x00, y00 = Transformacje.flh2PL2000(self, f,l)
+                X00.append(Transformacje.zamiana_float2string(self, x00))
+                Y00.append(Transformacje.zamiana_float2string(self, y00))
+            else:
+                x92 = "         '-'         " ; X92.append(x92)
+                y92 = "         '-'         " ; Y92.append(y92)
+                x00 = "         '-'         " ; X00.append(x00)
+                y00 = "         '-'         " ; Y00.append(y00)
+                
+        f1, l1, h1 = Transformacje.hirvonen(self, X[0], Y[0], Z[0])
+        n1, e1, u1 = Transformacje.xyz2neu(self, f1, l1, X[0], Y[0], Z[0], X[-1], Y[-1], Z[-1])
+        N.append(n1)
+        E.append(e1)
+        U.append(u1)
+        
+        i=0
+        while i<(ilosc_wierszy-1):
+            f, l, h = Transformacje.hirvonen(self, X[i], Y[i], Z[i])
+            n, e, u = Transformacje.xyz2neu(self, f, l, X[i], Y[i], Z[i], X[i+1], Y[i+1], Z[i+1])
+            N.append(n)
+            E.append(e)
+            U.append(u)
+            i+=1 
+            
+        for i in range(len(X)):
+            X[i] = Transformacje.zamiana_float2string(self, X[i])
+            Y[i] = Transformacje.zamiana_float2string(self, Y[i])
+            Z[i] = Transformacje.zamiana_float2string(self, Z[i])
+        
+        with open(xyz_txt , "w",  encoding="utf-8") as plik:
+            plik.write(f"Wyniki_obliczen_Geodezyjnych; X, Y, Z, fi, lambda, h, x1992, y1992, x2000, y2000.\n")
+            plik.write(f"Znak '-' w koordynatach; x1992, y1992, x2000, y2000 oznacza, że dla podanych współrzędnych ortokartezjańskich (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie należą do dozwolonych współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
+            plik.write("-"*221)
+            plik.write(f"\n")
+            plik.write(f"|          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
+            plik.write(f"\n")
+            plik.write("-"*221)
+            plik.write(f"\n")
+            for x, y, z, f, l, h, x92, y92, x00, y00 in zip(X, Y, Z, F, L, H, X92, Y92, X00, Y00):
+                plik.write(f"|{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
+                plik.write(f"\n")
+            plik.write("-"*221)
+        
+        with open(neu_txt , "w", encoding="utf-8") as plik1:
+            plik1.write(f"Wyniki n, e, u.\n")
+            plik1.write("-"*154)
+            plik1.write(f"\n")
+            plik1.write(f"|                        n                         |                        e                         |                        u                         |")
+            plik1.write(f"\n")
+            plik1.write("-"*154)
+            plik1.write(f"\n")
+            for n, e, u in zip(N, E, U):
+                plik1.write(f"|{n}|{e}|{u}|")
+                plik1.write(f"\n")
+            plik1.write("-"*154)
+            
+    def zamiana_float2string_rad(self, liczba):
+        '''
+        zamienia z float na str z dokładnocia taką jaką musi mieć jednostka radiany. 
+        Zrobione jest to po to żeby wynik się ładnie zapisywał w pliku wynikowym 
+
+        Parameters
+        ----------
+        liczba : FLOAT
+            Liczba w radianach.
+
+        Returns
+        -------
+        liczba : STR
+            string z okreloną stała iloscia znaków
+
+        '''
+        zm_liczba = "%.12f"%liczba
+        P = 16
+        xx = len(zm_liczba)
+        while xx < P:
+            zm_liczba = str(" ") + zm_liczba
+            xx += 1
+        return(zm_liczba)  
+
+    
+    def zamiana_float2string_fl(self, liczba):
+        '''
+        zamienia z float na str z dokładnocia taką jaką musi mieć jednostka stopnie dziesiętne. 
+        Zrobione jest to po to żeby wynik się ładnie zapisywał w pliku wynikowym 
+
+        Parameters
+        ----------
+        liczba : FLOAT
+            Liczba w stopniach dziesiętnych.
+
+        Returns
+        -------
+        liczba : STR
+            string z okreloną stała iloscia znaków
+
+        '''
+        zm_liczba = "%.10f"%liczba
+        P = 16
+        xx = len(zm_liczba)
+        while xx < P:
+            zm_liczba = str(" ") + zm_liczba
+            xx += 1
+        return(zm_liczba)        
+    
+    
+    def zamiana_float2string(self, liczba):
+        '''
+        zamienia z float na str z dokładnocia taką jaką musi mieć jednostka dms. 
+        Zrobione jest to po to żeby wynik się ładnie zapisywał w pliku wynikowym 
+
+        Parameters
+        ----------
+        liczba : FLOAT
+            Liczba w dms.
+
+        Returns
+        -------
+        liczbe : STR
+            string z okreloną stała iloscia znaków
+
+
+        '''
+        zm_liczba = "%.3f"%liczba
+        P = 21
+        xx = len(zm_liczba)
+        while xx < P:
+            zm_liczba = str(" ") + zm_liczba
+            xx += 1
+        return(zm_liczba)
+    
+    
+if __name__ == "__main__":
+    geo =Transformacje("WGS84")
+    geo.wczytanie_pliku_z_zapisem("input_file.txt")
+  
+        
