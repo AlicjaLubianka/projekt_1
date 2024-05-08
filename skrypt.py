@@ -603,7 +603,7 @@ class Transformacje:
     
     
 if __name__ == "__main__":
-    geo =Transformacje("WGS84")
-    geo.wczytanie_pliku_z_zapisem("input_file.txt")
+    mod =Transformacje("WGS84")
+    mod.wczytanie_pliku_z_zapisem("input_file.txt")
   
         
