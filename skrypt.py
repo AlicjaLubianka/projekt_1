@@ -425,6 +425,25 @@ class Transformacje:
         return(n, e, u) 
     
     def wczytanie_pliku_z_zapisem(self, dane, output='dms', xyz_txt = 'wyniki_xyz_flh_x92y92_x20y20.txt', neu_txt= 'wyniki_neu.txt'):
+        '''
+        Funkcja wczytuje plik z Danymi X,Y,Z, a następnie tworzy listę posegregowanych X,Y,Z wykorzystując wyjsciowe dane.
+        Następnie funkcja zapisuje wyniki obliczeń (X, Y, Z, f, l, h, x92, y92, x20, y20, neu) tworząc z nich tabele.
+
+        Parameters
+        ----------
+        dane : TYPE
+            DESCRIPTION.
+        output : str
+            Sposób, w którym funkcja ma zapisywać współrzęde f oraz l [dms, radiany, dec_degree]. 
+        xyz_txt : str
+           Nazwa pliku z wynikami dla xyz, flh, PL1992, PL2000.
+        neu_txt : str
+            Nazwa pliku z wynikami dla neu.
+        Returns
+        -------
+        Plik txt
+
+        '''
         with open(dane, "r") as plik:
             tab=np.genfromtxt(plik, delimiter=",", dtype = '<U20', skip_header = 4)
             X=[]
@@ -500,21 +519,21 @@ class Transformacje:
             Z[i] = Transformacje.zamiana_float2string(self, Z[i])
         
         with open(xyz_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Zestawienie_wyników_obliczeń_geodezyjnych; X, Y, Z, fi, lambda, h, x1992, y1992, x2000, y2000.\n")
-            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych punktów na pow. Ziemi; X1992, Y1992, X2000, Y2000 oznacza, to że dla podanych (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie są akceptowalne w standardowych układach współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
+            plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z, f, l, h, x1992, y1992, x2000, y2000.\n")
+            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X1992, Y1992, X2000, Y2000) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL1992, PL2000.\n")
             plik.write("-"*221)
             plik.write(f"\n")
-            plik.write(f"|          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
+            plik.write(f"||          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
             plik.write(f"\n")
             plik.write("-"*221)
             plik.write(f"\n")
             for x, y, z, f, l, h, x92, y92, x00, y00 in zip(X, Y, Z, F, L, H, X92, Y92, X00, Y00):
-                plik.write(f"|{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
+                plik.write(f"||{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
                 plik.write(f"\n")
             plik.write("-"*221)
         
         with open(neu_txt , "w", encoding="utf-8") as plik1:
-            plik1.write(f"Wyniki n, e, u.\n")
+            plik1.write(f"Wyniki n, e, u:.\n")
             plik1.write("-"*154)
             plik1.write(f"\n")
             plik1.write(f"|                        n                         |                        e                         |                        u                         |")
@@ -663,21 +682,21 @@ class Transformacje:
         
         if not os.path.exists(xyz_txt):
             with open(xyz_txt, "w", encoding="utf-8") as plik:
-                plik.write(f"Zestawienie_wyników_obliczeń_geodezyjnych; X, Y, Z, fi, lambda, h, X1992, Y1992, X2000, Y2000.\n")
+                plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z, fi, lambda, h, X1992, Y1992, X2000, Y2000.\n")
                 plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych punktów na pow. Ziemi; X1992, Y1992, X2000, Y2000 oznacza, to że dla podanych (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie są akceptowalne w standardowych układach współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
                 plik.write("-"*221)
                 plik.write(f"\n")
-                plik.write(f"|          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
+                plik.write(f"||          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
                 plik.write(f"\n")
                 plik.write("-"*221)
                 plik.write(f"\n")
-                plik.write(f"|{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
+                plik.write(f"||{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
                 plik.write(f"\n")
                 plik.write("-"*221)
                 plik.write(f"\n")
         else:
             with open(xyz_txt, "a", encoding="utf-8") as plik:
-                plik.write(f"|{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
+                plik.write(f"||{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
                 plik.write(f"\n")
                 plik.write("-"*221)
                 plik.write(f"\n")
