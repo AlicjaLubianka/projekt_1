@@ -473,25 +473,25 @@ class Transformacje:
                 F.append(f)
                 L.append(l)
             elif output == "radiany":
-                f=Transformacje.zamiana_float2string_rad(self,f)
-                l=Transformacje.zamiana_float2string_rad(self,l)
+                f=Transformacje.f2s_rad(self,f)
+                l=Transformacje.f2s_rad(self,l)
                 F.append(f)
                 L.append(l)
             else:
-                f=Transformacje.zamiana_float2string_fl(self,f)
-                l=Transformacje.zamiana_float2string_fl(self,l)
+                f=Transformacje.f2s_fl(self,f)
+                l=Transformacje.f2s_fl(self,l)
                 F.append(f)
                 L.append(l)
-            H.append(Transformacje.zamiana_float2string(self, h))
+            H.append(Transformacje.f2s(self, h))
             f,l,h = Transformacje.hirvonen(self, x, y, z)
             
             if l >= 13.5 and l <= 25.5 and f <= 55.0 and f >= 48.9:
                 x92, y92 = Transformacje.flh2PL1992(self, f,l)
-                X92.append(Transformacje.zamiana_float2string(self, x92))
-                Y92.append(Transformacje.zamiana_float2string(self, y92))
+                X92.append(Transformacje.f2s(self, x92))
+                Y92.append(Transformacje.f2s(self, y92))
                 x00, y00 = Transformacje.flh2PL2000(self, f,l)
-                X00.append(Transformacje.zamiana_float2string(self, x00))
-                Y00.append(Transformacje.zamiana_float2string(self, y00))
+                X00.append(Transformacje.f2s(self, x00))
+                Y00.append(Transformacje.f2s(self, y00))
             else:
                 x92 = "         '-'         " ; X92.append(x92)
                 y92 = "         '-'         " ; Y92.append(y92)
@@ -514,9 +514,9 @@ class Transformacje:
             i+=1 
             
         for i in range(len(X)):
-            X[i] = Transformacje.zamiana_float2string(self, X[i])
-            Y[i] = Transformacje.zamiana_float2string(self, Y[i])
-            Z[i] = Transformacje.zamiana_float2string(self, Z[i])
+            X[i] = Transformacje.f2s(self, X[i])
+            Y[i] = Transformacje.f2s(self, Y[i])
+            Z[i] = Transformacje.f2s(self, Z[i])
         
         with open(xyz_txt , "w",  encoding="utf-8") as plik:
             plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z, f, l, h, x1992, y1992, x2000, y2000.\n")
@@ -545,7 +545,7 @@ class Transformacje:
                 plik1.write(f"\n")
             plik1.write("-"*154)
             
-    def zamiana_float2string_rad(self, liczba):
+    def f2s_rad(self, liczba):
         '''
         Konwertuje liczby zmiennoprzecinkowe [float] na ciągi znaków [string], zachowując precyzję 
         odpowiednią dla jednostki radianów. Celem jest estetyczne zapisanie wyników w pliku wyjściowym.
@@ -570,7 +570,7 @@ class Transformacje:
         return(zm_liczba)  
 
     
-    def zamiana_float2string_fl(self, liczba):
+    def f2s_fl(self, liczba):
         '''
         Przekształca liczby zmiennoprzecinkowe [float] na ciągi znaków [string] z odpowiednią precyzją, 
         zgodną z formatem stopni dziesiętnych. Cel jest taki, aby wyniki były czytelnie zapisane w pliku wynikowym.
@@ -595,7 +595,7 @@ class Transformacje:
         return(zm_liczba)        
     
     
-    def zamiana_float2string(self, liczba):
+    def f2s(self, liczba):
         '''
         Konwersja z liczb zmiennoprzecinkowych [float] na ciągi znaków [string] z dokładnością odpowiadającą 
         wymogom formatu stopni, minut i sekund (dms). Proces ten ma na celu estetyczne zapisanie 
@@ -656,29 +656,29 @@ class Transformacje:
             f=f
             l=l
         elif output == "radiany":
-            f=Transformacje.zamiana_float2string_rad(self,f)
-            l=Transformacje.zamiana_float2string_rad(self,l)
+            f=Transformacje.f2s_rad(self,f)
+            l=Transformacje.f2s_rad(self,l)
         else:
-            f=Transformacje.zamiana_float2string_fl(self,f)
-            l=Transformacje.zamiana_float2string_fl(self,l)
-        h = Transformacje.zamiana_float2string(self, h)
+            f=Transformacje.f2s_fl(self,f)
+            l=Transformacje.f2s_fl(self,l)
+        h = Transformacje.f2s(self, h)
         F,L,H = Transformacje.hirvonen(self, x, y, z)
         
         if L >= 13.5 and L <= 25.5 and F <= 55.0 and F >= 48.9:
             x92, y92 = Transformacje.flh2PL1992(self, F,L)
-            x92 = Transformacje.zamiana_float2string(self, x92)
-            y92 = Transformacje.zamiana_float2string(self, y92)
+            x92 = Transformacje.f2s(self, x92)
+            y92 = Transformacje.f2s(self, y92)
             x00, y00 = Transformacje.flh2PL2000(self, F,L)
-            x00 = Transformacje.zamiana_float2string(self, x00)
-            y00 = Transformacje.zamiana_float2string(self, y00)
+            x00 = Transformacje.f2s(self, x00)
+            y00 = Transformacje.f2s(self, y00)
         else:
             x92 = "         '-'         " 
             y92 = "         '-'         " 
             x00 = "         '-'         "
             y00 = "         '-'         "
-        x = Transformacje.zamiana_float2string(self, x)
-        y = Transformacje.zamiana_float2string(self, y)
-        z = Transformacje.zamiana_float2string(self, z)
+        x = Transformacje.f2s(self, x)
+        y = Transformacje.f2s(self, y)
+        z = Transformacje.f2s(self, z)
         
         if not os.path.exists(xyz_txt):
             with open(xyz_txt, "w", encoding="utf-8") as plik:
