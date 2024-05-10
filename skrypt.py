@@ -683,7 +683,7 @@ class Transformacje:
         if not os.path.exists(xyz_txt):
             with open(xyz_txt, "w", encoding="utf-8") as plik:
                 plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z, fi, lambda, h, X1992, Y1992, X2000, Y2000.\n")
-                plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych punktów na pow. Ziemi; X1992, Y1992, X2000, Y2000 oznacza, to że dla podanych (X, Y, Z) po obliczeniu współrzędnych geodezyjnych fi i lambda. fi i lambda nie są akceptowalne w standardowych układach współrzędnych \ngeodezyjnych układów PL1992, PL2000.\n")
+                plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X1992, Y1992, X2000, Y2000) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL1992, PL2000.\n")
                 plik.write("-"*221)
                 plik.write(f"\n")
                 plik.write(f"||          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
