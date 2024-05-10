@@ -62,29 +62,27 @@
 	\tableofcontents
 	\newpage
 	\section{Cel ćwiczenia}
-	W ramach ćwiczenia opracowano skrypt w języku Python w postaci klasy zawierającej metody służące do transformacji współrzędnych pomiędzy układem kartezjańskim (x, y, z) a geodezyjnym ($\phi$, $\lambda$, H). W implementacji wykorzystano odpowiednie algorytmy przekształceń współrzędnych, zapewniające dokładność i poprawność operacji.
+	W ramach ćwiczenia opracowano skrypt w języku Python w postaci klasy zawierającej metody służące do transformacji współrzędnych pomiędzy układem kartezjańskim (x, y, z) a geodezyjnym ($\phi$, $\lambda$, H). Aby dokonać transformacji pomiędzy układami należy zastosować odpowiednie algorytmy. Poniżej przedstawiona jest lista utworzonych algorytmów:
 	\begin{itemize}
-		\item hirvonen(xyz2flh)
-		\item flh2xyz
-		\item flh2PL92
-		\item flh2PL20
-		\item xyz2neu 
+		\item XYZ ( geocentryczne) -> BLH ( elipsoidalne fi, lambda, h)
+		\item BLH -> XYZ 
+		\item XYZ -> NEU ( topocentryczne northing, easting, up)
+		\item BL ( GRS80, WGS84, ew. Krasowski) -> PL2000
+		\item BL ( GRS80, WGS84, ew. Krasowski) -> PL1992
 		
 	\end{itemize}
 	\section{Wykorzystane narzędzia i materiały potrzebne do replikacji ćwiczenia}
 	
 	\subsection{Wybrany język programowania i interpreter Spyder}
 	
-	\begin{itemize}
-		\item 
-		Python - język programowania, w którym został napisany skrypt ćwiczenia.
-		\item Spyder - to środowisko programistyczne dla języka Python, które oferuje edytor kodu, interpreter, konsolę i wiele innych funkcjonalności.
-		\item Najlepiej pobrać Spydera poprzez Anacondę, która domyślnie zawiera środowisko programistyczne Spyder 
-	\end{itemize}
-	
+
+		
+	Do napisania skryptu tego ćwiczenia posłużył nam język programowania Python, a za środowisko odpowiadał Spyder zawierający edytor kodu, interpreter, konsolę, a także inne funkcje.
+	 
+
 	\subsection{System operacyjny}
 	
-	Ten skrypt został napisany w systemie operacyjnym Microsoft (Windows 11).
+	Plik został utworzony w systemie operacyjnym Microsoft ( Windows 11).
 	
 	\subsection{Potrzebne biblioteki i pliki}
 	
@@ -94,12 +92,41 @@
 	\item Numpy - biblioteka w języku Python służąca do obliczeń numerycznych i analizy danych. Zapewnia narzędzia do pracy z wielowymiarowymi tablicami danych oraz operacji matematycznych i statystycznych na tych tablicach. Numpy nie jest wbudowany w Pythona, lecz jest dostarczany z Anacondą, co ułatwia jego dostępność.
 	\item Argparse - biblioteka w języku Python do parsowania argumentów linii poleceń. Jest częścią standardowej biblioteki Pythona, co oznacza, że jest wbudowana w standardową instalację Anacondy.
 	\item Os - biblioteka standardowa w języku Python zapewniająca interfejs do operacji na systemie operacyjnym, takich jak dostęp do plików, zarządzanie procesami, zmiana katalogu roboczego, itp.	
-	\item Pytest - biblioteka w języku Python służąca do testowania kodu źródłowego. Umożliwia łatwe i elastyczne pisanie testów. Pytest nie jest wbudowany ani w standardową instalację Pythona, ani w dystrybucję pakietów Anaconda, ale można go zainstalować za pomocą menedżera pakietów pip.
-	\item Tkinter - biblioteka graficzna dla języka programowania Python. Umożliwia tworzenie interfejsów graficznych użytkownika (GUI) dla programów Python. Tkinter jest dostępny w standardowej bibliotece Pythona i łatwo dostępny na większości platform.
 		
 	\end{enumerate}
+	\section{Przebieg ćwiczenia}
 	
-.... wpisac tu potrzebne pliki
+	\subsection{Utworzenie klasy Transformacja}
+
+	\subsection{Algorytm hirvonena} 
+
+	
+	\subsection{flh2XYZ} 
+
+	\subsection{flh2PL1992} 
+
+	\subsection{flh2PL2000} 
+
+	
+	\subsection{xyz2neu} 
+	
+	\newpage
+	\subsection{Wczytywanie i zapisywanie pliku}
+
+	\begin{itemize}
+		\item 
+		\item 
+		\item 
+	\end{itemize}
+
+	\subsection{Kalkulator transformacji i zapis ich wyników do Kalkulatora}
+
+	($\phi$, $\lambda$, H) 
+
+	
+	\subsection{Dodanie możliwości wczytania pliku w argparse}
+
+	
 
 		
 \end{document}

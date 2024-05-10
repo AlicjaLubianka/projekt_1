@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.4.16)  7 MAY 2024 15:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.4.16)  10 MAY 2024 21:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1010,7 +1010,7 @@ Package hyperref Info: Link coloring OFF on input line 47.
 \@outlinefile=\write3
 \openout3 = `ala_magda.out'.
 
-<WGiK-znak.png, id=23, 471.6822pt x 123.8226pt>
+<WGiK-znak.png, id=63, 471.6822pt x 123.8226pt>
 File: WGiK-znak.png Graphic file (type png)
 <use WGiK-znak.png>
 Package pdftex.def Info: WGiK-znak.png  used on input line 51.
@@ -1034,19 +1034,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write4
 \openout4 = `ala_magda.toc'.
 
- [2] [3] (ala_magda.aux)
+ [2] [3] [4] (ala_magda.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `ala_magda.out' has not changed.
-(rerunfilecheck)             Checksum: E741112C9D9E87F7958AAB1FCCCBFE73;1193.
+(rerunfilecheck)             Checksum: 0BBA53CC586977BBBD49DB86BEFDF961;2999.
  ) 
 Here is how much of TeX's memory you used:
- 16144 strings out of 474486
- 269489 string characters out of 5729657
- 1935542 words of memory out of 5000000
- 38192 multiletter control sequences out of 15000+600000
+ 16163 strings out of 474486
+ 269773 string characters out of 5729657
+ 1934542 words of memory out of 5000000
+ 38202 multiletter control sequences out of 15000+600000
  566754 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,5n,79p,466b,455s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1060,9 +1060,9 @@ pen/ec/dpi600\ecrm1200.pk> <C:\Users\Ala\AppData\Local\MiKTeX\fonts/pk/ljfour/j
 knappen/ec/dpi600\eccc1200.pk> <C:\Users\Ala\AppData\Local\MiKTeX\fonts/pk/ljfo
 ur/jknappen/ec/dpi600\eccc1440.pk><C:/Users/Ala/Desktop/Studia_GiK_semestr_3/SE
 MESTR 4/Informatyka geodezyjna/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on ala_magda.pdf (3 pages, 176814 bytes).
+Output written on ala_magda.pdf (4 pages, 197776 bytes).
 PDF statistics:
- 338 PDF objects out of 1000 (max. 8388607)
- 15 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 429 PDF objects out of 1000 (max. 8388607)
+ 24 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 
