@@ -25,17 +25,17 @@ print("")
 print("")
 print("Elipsida:", args.m)
 x, y, z = mod.flh2XYZ(args.f, args.l, args.ha)
-print(f"Wyniki_z_transformacji_flh2xyz; X = {x:^.3f}[m], Y = {y:^.3f}[m], Z = {z:^.3f}[m]")
+print(f"Wyniki z transformacji flh2xyz: X = {x:^.3f}[m], Y = {y:^.3f}[m], Z = {z:^.3f}[m]")
 if args.l >= 13.5 and args.l <= 25.5 and args.f <= 55.0 and args.f >= 48.9:
     x92, y92 = mod.flh2PL1992(args.f,args.l)
     x00, y00 = mod.flh2PL2000(args.f,args.l)
-    print(f"Wyniki_z_transformacji_flh2PL92_I_flh2PL00; X1992 = {x92:^.3f}[m], Y1992 = {y92:^.3f}[m], X2000 = {x00:^.3f}[m], Y2000 = {y00:^.3f}[m]")
+    print(f"Wyniki z transformacji flh2PL92 i flh2PL00: X1992 = {x92:^.3f}[m], Y1992 = {y92:^.3f}[m], X2000 = {x00:^.3f}[m], Y2000 = {y00:^.3f}[m]")
 else:
     x92 = " '-' " 
     y92 = " '-' " 
     x00 = " '-' " 
     y00 = " '-' " 
-    print(f"Wyniki_z_transformacji_flh2PL92_i_flh2PL00; X1992 = {x92}[m], Y1992 = {y92}[m], X2000 = {x00}[m], Y2000 = {y00}[m]")
+    print(f"Wyniki z transformacji flh2PL92 i flh2PL00: X1992 = {x92}[m], Y1992 = {y92}[m], X2000 = {x00}[m], Y2000 = {y00}[m]")
     print("To położenie nie jest obsługiwane przez układy współrzędnych płaskich PL1992 i PL2000")
 
 print("Nazwa pliku głównego:", skrypt.__name__)
