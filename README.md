@@ -27,6 +27,11 @@ W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać wsp
 
 PRZYKŁAD: python kalkulator_xyz2reszta.py -m GRS80 -xyz wyniki.txt -f 40 -l 50 -ha 54 -output dms
 
+**ZNANE BŁĘDY I NIETYPOWE ZACHOWANIA**
+- Program zwraca błąd w przypadku podania niepoprawnego modelu elipsoidy lub systemu współrzędnych.
+- Transformacja FLH -> PL-1992 oraz FLH ->PL-2000 dla elipsoidy Krasowskiego zwraca błędne wyniki, dlatego nie można ich używać (nie jesteśmy pewne, ale działając na kodach z zajęć Geodezja Wyższa I  uzyskujemy inne wyniki)
+
+
 [-m] - [GRS80, WGS84, Krasowski] - wybranie modelu elipsoidy.
 
 [-xyz] - [Nazwapliku.rozszerzenie] - wybranie nazwy
