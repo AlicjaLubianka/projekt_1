@@ -97,34 +97,47 @@
 	\section{Przebieg ćwiczenia}
 	
 	\subsection{Utworzenie klasy Transformacja}
-
-	\subsection{Algorytm hirvonena} 
-
+	Utworzono klasę Transformację oraz konstruktor __init__, w którym przekazywane są parametry elipsoidy ( a, e2), niezbędne do wykonywania obliczeń. Ważne, aby pamiętać, gdy się odwołujemy do powyższych parametrów, musimy zastosować self. Dodatkowo, pokazano sytuację, gdy podana zostanie nieprawidłowa nazwa elipsoidy, co skutkuje wyświetleniem błędu. 
 	
-	\subsection{flh2XYZ} 
+	\subsection{Algorytm hirvonena} 
+	Algorytm Hirvonena przekształca współrzędne kartezjańskie ( X,Y,Z) na współrzędne geodezyjne ($\phi$, $\lambda$, H). W funkcji implementującej ten algorytm, używana jest pętla while, która wykonuje odpowiednią liczbę iteracji, aby uzyskać dokładność na poziomie 1 mm. Dodatkowo zaimplementowany został warunek „output” za pomocą instrukcji warunkowych elif, if, else, pozwalający na wybór formatu wyniku. Do jednej z metod przekształceniowej ( stopnie, minuty sekundy) powstał dodatkowy algorytm „dms”. Prócz tego utworzono funkcję „np”, obliczającą promień przekroju w pierwszym wertykale. Wyniki działania transformacji zostały zweryfikowane z wynikami uzyskanymi w zaliczonym sprawozdaniu z poprzedniego semestru.
+	
+	\subsection{flh2XYZ}
+	Transformacja flh konwertuje współrzędne geodezyjne (φ, λ, h) na współrzędne kartezjańskie (x,y,z). W implementacji tej transformacji zastosowano trzy wzory, z których każdy odpowiada jednej ze współrzędnych kartezajńskich. Dodatkowo wykorzystana została funkcja „Np”. Wyniki działania transformacji zostały zweryfikowane z wynikami uzyskanymi w zaliczonym sprawozdaniu z poprzedniego semestru.
+	
+	 
 
-	\subsection{flh2PL1992} 
+	\subsection{flh2PL1992}
+	Transormacja fl21992 przekształca współrzędne geodezyjne (φ, λ) na współrzędne w układzie 1992 ( x1992, y1992). W implementacji tej transformacji dodano warunek ograniczający współrzędne φ i λ do obszaru wyłącznie Polski, aby uniknąć błędów. Następnie obliczono wartości x1992, y1992 przy użyciu odpowiednich wzorów. Wyniki działania transformacji zostały zweryfikowane z wynikami uzyskanymi w zaliczonym sprawozdaniu z poprzedniego semestru.  
 
 	\subsection{flh2PL2000} 
+	Transformacja fl2PL2000 konwertuje współrzędne geodezyjne (φ, λ) na współrzędne w układzie 2000 ( x2000, y2000). Implementacja tej transformacji przebiega niemal identycznie jak tranformacja fl2PL1992, z wyjątkiem zmiany skali oraz ustaleniem odpowiedniej strefy ( 5,6,7,8) dla naszych danych. Po zamianie współrzędnych otrzymano x2000, y2000. Wyniki działania transformacji zostały zweryfikowane z wynikami uzyskanymi w zaliczonym sprawozdaniu z poprzedniego semestru. 
 
 	
 	\subsection{xyz2neu} 
-	
+	Transformacja xyz2neu przekształca współrzędne kartezjańskie ( x,y,z ) do układu neu. W implementacji tej transformacji stworzono trzy definicje. Pierwsza dotyczyła mecierzy obrotu (renu), druga obliczała macierz różnic między dwoma punktami, a trzecia obliczała macierz neu. Pierwsza kolumna ( odpowiadała współrzędnej n, druga współrzędnej e, a trzecia u. Wyniki działania transformacji zostały zweryfikowane z wynikami uzyskanymi w zaliczonym sprawozdaniu z poprzedniego semestru. 
 	\newpage
 	\subsection{Wczytywanie i zapisywanie pliku}
+	Aby odczytać i zapisać plik, stworzono trzy funkcje. Pierwsza służy do odczytu pliku w formacie txt, a druga transformuje zmienne głównie do stringów, aby wszystkie miały taką samą długość. Do tego celu użyto funkcji zamian float na string: 
 
 	\begin{itemize}
-		\item 
-		\item 
-		\item 
+		\item f2s;
+		\item f2s_fl;
+		\item f2s_rad,
+
 	\end{itemize}
+	które działają na tej samej zasadzie, czyli dodają spację przed liczbą za pomocą pętli while, a warunek kończy się, gdy string osiągnie odpowiednią długość. Trzecia funkcja zapisuje plik w postaci tabelki z nagłówkiem. Dla punktów spoza Polski w wynikach ( x1992, y1992, x2000, y2000) stosowane są myślniki.
 
 	\subsection{Kalkulator transformacji i zapis ich wyników do Kalkulatora}
+	W celu wykonania transformacji współrzędnych do różnych układów, został stworzony kalkulator o nazwie „kalkulator_xyz2reszta.py. Korzysta z importowanych transformacji z pliku głównego oraz biblioteki argparse, wykorzystując ArgumentParser. 
+	
+	tutaj ala uzupełnij !!!
 
 	($\phi$, $\lambda$, H) 
 
 	
 	\subsection{Dodanie możliwości wczytania pliku w argparse}
+	Dodatkowo w głównym pliku dodaliśmy funkcję umożliwiającą wczytywanie i zapisanie pliku wynikowego za pomocą biblioteki argparse. Dzięki temu użytkownik może teraz użytkownik może teraz wczytać plik z wiersza poleceń. 
 
 	
 
