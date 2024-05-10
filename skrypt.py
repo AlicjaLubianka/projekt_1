@@ -318,17 +318,17 @@ class Transformacje:
         Parameters
         ----------
         xa : FLOAT
-            współrzędna w układzie orto-kartezjańskim
+            współrzędna w układzie ortokartezjańskim
         ya : FLOAT
-            współrzędna w układzie orto-kartezjańskim
+            współrzędna w układzie ortokartezjańskim
         za : FLOAT
-            współrzędna w układzie orto-kartezjańskim
+            współrzędna w układzie ortokartezjańskim
         xb : FLOAT
-            współrzędna w układzie orto-kartezjańskim
+            współrzędna w układzie ortokartezjańskim
         yb : FLOAT
-            współrzędna w układzie orto-kartezjańskim
+            współrzędna w układzie ortokartezjańskim
         zb : FLOAT
-            współrzędna w układzie orto-kartezjańskim
+            współrzędna w układzie ortokartezjańskim
     
         Returns
         -------
@@ -665,10 +665,10 @@ class Transformacje:
         F,L,H = Transformacje.hirvonen(self, x, y, z)
         
         if L >= 13.5 and L <= 25.5 and F <= 55.0 and F >= 48.9:
-            x92, y92 = Transformacje.flh2PL92(self, F,L)
+            x92, y92 = Transformacje.flh2PL1992(self, F,L)
             x92 = Transformacje.zamiana_float2string(self, x92)
             y92 = Transformacje.zamiana_float2string(self, y92)
-            x00, y00 = Transformacje.flh2PL00(self, F,L)
+            x00, y00 = Transformacje.flh2PL2000(self, F,L)
             x00 = Transformacje.zamiana_float2string(self, x00)
             y00 = Transformacje.zamiana_float2string(self, y00)
         else:
