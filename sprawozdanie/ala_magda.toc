@@ -6,11 +6,16 @@
 \contentsline {subsection}{\numberline {2.3}Potrzebne biblioteki i pliki}{3}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Przebieg ćwiczenia}{3}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Utworzenie klasy Transformacja}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Algorytm hirvonena}{3}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}flh2XYZ}{3}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}flh2PL1992}{3}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}flh2PL2000}{3}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}xyz2neu}{3}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Wczytywanie i zapisywanie pliku}{4}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Kalkulator transformacji i zapis ich wyników do Kalkulatora}{4}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Dodanie możliwości wczytania pliku w argparse}{4}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.2}Algorytm hirvonena}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}flh2XYZ}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}flh2PL1992}{4}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}flh2PL2000}{4}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}xyz2neu}{4}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Wczytywanie i zapisywanie pliku}{5}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Kalkulator transformacji i zapis ich wyników do Kalkulatora}{5}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Dodanie możliwości wczytania pliku w argparse}{5}{subsection.3.9}%
+\contentsline {section}{\numberline {4}Podsumowanie}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Rezultaty}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Umiejętności nabyte}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Spostrzerzenia, probelmy i ich rozwizania:}{6}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Literatura}{7}{section.5}%
