@@ -1,3 +1,5 @@
+#Kalkulator geodezyjny
+
 **OPIS**
 
 Program umożliwia przeliczenie współrzędnych geodezyjnych między układami BLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry] oraz PL-1992 (współrzędne płaskie) [metry] i PL-2000 (współrzędne płaskie) [metry]. 
