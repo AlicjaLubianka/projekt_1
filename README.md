@@ -40,4 +40,6 @@ Wyniki: Współrzędne ortokartezjańskie geocentryczne [metry], współrzędne 
 
 •	Program zwraca błąd w przypadku podania niepoprawnego modelu elipsoidy lub systemu współrzędnych.
 
-•	Transformacja FLH -> PL-1992 oraz FLH ->PL-2000 dla elipsoidy Krasowskiego zwraca błędne wyniki, dlatego nie można ich używać (nie jesteśmy pewne, ale działając na kodach z zajęć Geodezja Wyższa I  uzyskujemy inne wyniki)
+•	Transformacja FLH -> PL-1992 oraz FLH ->PL-2000 dla elipsoidy Krasowskiego zwraca błędne wyniki, dlatego nie można ich używać (nie jesteśmy pewne, ale działając na kodach z zajęć Geodezja Wyższa I  uzyskujemy inne wyniki).
+
+UWAGA! W końcowym etapie zauważyłyśmy, że nasz plik został błędnie nazwany. Powinien nosić nazwę "kalkulator_blh2reszta.py", a nie "kalkulator_xyz2reszta.py". Taka sytuacja może być myląca.
