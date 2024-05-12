@@ -43,9 +43,13 @@ Współrzędne ortokartezjańskie geocentryczne [metry], współrzędne płaskie
 Otrzymujemy:
 
 Elipsoida: GRS80
+
 Wyniki dla transformacji flh2xyz: X = 3144998.413 [m], Y = 3748063.157 [m], Z = 4078020.283 [m]
+
 Wyniki z transformacji flh2PL92 i flh2PL20: X1992 =  '-'  [m], Y1992 =  '-'  [m], X2000 =  '-'  [m], Y2000 =  '-'  [m]
+
 To położenie nie jest obsługiwane przez układy współrzędnych płaskich PL1992 i PL2000
+
 Nazwa pliku głównego: skrypt
 
 **ZNANE BŁĘDY I NIETYPOWE ZACHOWANIA**
