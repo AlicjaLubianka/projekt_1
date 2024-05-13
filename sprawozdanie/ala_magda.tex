@@ -131,7 +131,7 @@
 
 	\subsection{Kalkulator transformacji i zapis ich wyników do Kalkulatora}
 	W celu wykonania transformacji współrzędnych do różnych układów, został stworzony kalkulator o nazwie „kalkulator\_{}xyz2reszta.py. Korzysta z importowanych transformacji z pliku głównego oraz biblioteki argparse, wykorzystując ArgumentParser.
-	Ma to na celu możliwość podawania przez użytkownika współrzędnych geodezyjnych ($\phi$, $\lambda$, h) oraz elipoidy. Następnie są liczone do układu kartezjańskiego (x, y, z), PL1992 i PL2000.
+	Ma to na celu możliwość podawania przez użytkownika współrzędnych geodezyjnych ($\phi$, $\lambda$, h), elipoidy oraz jednostki w jakich chcemy otrzymać wyniki. Następnie są liczone do układu kartezjańskiego (x, y, z), PL1992 i PL2000.
 	\newline
 	W pliku głównym skrypt.py stworzyliśmy specjlne funkcje, które zapisują wyniki kalkulatora. 
 	W nich przeprowadzono niezbędne operacje na zmiennych, na przykład zamienienie z typu float na string, zachowując odpowiednią liczbę miejsc po przecinku. Celem było to, aby podany plik wynikowy miał odpowiednią postać. Również użyto biblioteki os, aby sprawdzić, czy dany plik już znajduje się na naszym komputerze. Dzięki temu nie jest tworzony nowy dokument z nagłówkami, a do istniejącego dokumentu dodawane są kolejne linijki.
