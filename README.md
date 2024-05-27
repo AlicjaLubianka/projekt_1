@@ -18,15 +18,17 @@ Program napisany jest dla systemu Windows. Został testowany na Windows11.
 **INSTRUKCJA OBSŁUGI**
 
 Program umożliwia  transformację FLH -> XYZ, FLH->PL1992, FLH->PL2000 dla wcześniej podanych elipsoid. Dane wejściowe i wyjściowe programu są obsługiwane w formacie zmiennoprzecinkowym (float).
-Należy skorzystać z opcji wprowadzania ręcznego (input txt) dla wprowadzenia współrzędnych.
 
-Aby uzyskać współrzędne przeliczone na wybrany przez nas układ odniesienia, musimy otworzyć w wierszu poleceń (cmd) ścieżkę do folderu zawierającego nasz plik (przykładowa ścieżka: C:\Users\user \Pulpit\informatyka\projekt1), a następnie wpisać słowo „python” oraz nazwę naszego pliku (w tym przypadku plik: „wyniki.txt”).
 
-W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach).
+Nasz program wykonuje transformację z BLH na XYZ, PL1992 oraz PL2000 za pomocą pojedynczej komendy. Po zakończeniu tej komendy wyświetlane są jednocześnie wyniki wszystkich tych transformacji.
+
+Sposób wprowadzenia współrzędnych: wprowadzanie ręczne (--input cmd). Aby uzyskać współrzędne przeliczone na wybrany przez nas układ musimy otworzyć w oknie cmd ścieżkę do folderu z naszym plikiem (przykład ścieżki: C:\Users\user\OneDrive\Pulpit\informatyka\projekt1) a następnie wpisać słowo „python” oraz nazwę naszego pliku (w tym przypadku plik: „kalkulator_xyz2reszta.py").
+
+W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach) dla transformacji BLH -> XYZ, BLH -> PL1992 oraz BLH -> PL2000.
 
 **PRZYKŁAD**
 
-python kalkulator_xyz2reszta.py -m GRS80 -xyz wyniki.txt -f 40 -l 50 -ha 54 -output dms
+Mamy także możliwość wyboru układu wprowadzanych przez nas współrzędnych, docelowego układu do którego chcemy przeliczyć nasze współrzędne oraz wyboru elipsoidy (spośród trzech wyżej wymienionych), a także wybrania pliku docelowego, do którego chcemy zapisać otrzymane wyniki.
 
 - [-m] - [GRS80, WGS84, Krasowski] - wybranie modelu elipsoidy.
   
@@ -35,7 +37,11 @@ python kalkulator_xyz2reszta.py -m GRS80 -xyz wyniki.txt -f 40 -l 50 -ha 54 -out
 - [-f, -l, -ha] - [stopnie dziesietne] - współrzędne geodezyjne elipsoidalne punktu, wysokość [metry].
   
 - [-output] - [dms/dec_degree/radiany] - wybieramy w jakich jednostkach chcemy mieć wyniki.
-  
+
+Przykład:
+
+python kalkulator_xyz2reszta.py -m GRS80 -xyz wyniki.txt -f 40 -l 50 -ha 54 -output dms
+
 Wyniki: 
 
 Współrzędne ortokartezjańskie geocentryczne [metry], współrzędne płaskie PL1992 [metry], współrzędne płaskie PL2000 [metry]. [x, y, z, h, x1992, y1992, x2000, y2000].
@@ -51,6 +57,8 @@ Wyniki z transformacji flh2PL92 i flh2PL20: X1992 =  '-'  [m], Y1992 =  '-'  [m]
 To położenie nie jest obsługiwane przez układy współrzędnych płaskich PL1992 i PL2000
 
 Nazwa pliku głównego: skrypt
+
+Nasze wyniki zapisują się w pliku o nazwie "wyniki.txt".
 
 **ZNANE BŁĘDY I NIETYPOWE ZACHOWANIA**
 
