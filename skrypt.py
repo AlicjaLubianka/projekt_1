@@ -427,7 +427,7 @@ class Transformacje:
     def wczytanie_pliku_z_zapisem(self, dane, output='dms', xyz_txt = 'wyniki_xyz.txt', flh_txt = 'wyniki_flh.txt', x1992_y1992_txt = 'wyniki_x1992_y1992.txt', x2000_y2000_txt = 'wyniki_x2000_y2000.txt', neu_txt= 'wyniki_neu.txt'):
         '''
         Funkcja wczytuje plik z Danymi X,Y,Z, a następnie tworzy listę posegregowanych X,Y,Z wykorzystując wyjsciowe dane.
-        Następnie funkcja zapisuje wyniki obliczeń (X, Y, Z, f, l, h, x92, y92, x20, y20, neu) tworząc z nich tabele.
+        Następnie funkcja zapisuje wyniki obliczeń XYZ,FLH, X1992_Y1992, X2000_Y2000 tworząc z nich tabele w różnych plikach tekstowych.
 
         Parameters
         ----------
@@ -436,7 +436,13 @@ class Transformacje:
         output : str
             Sposób, w którym funkcja ma zapisywać współrzęde f oraz l [dms, radiany, dec_degree]. 
         xyz_txt : str
-           Nazwa pliku z wynikami dla xyz, flh, PL1992, PL2000.
+           Nazwa pliku z wynikami dla xyz.
+        flh_txt : str
+           Nazwa pliku z wynikami dla flh.
+        x1992_y1992_txt : str
+           Nazwa pliku z wynikami dla PL1992.    
+        x2000_y2000_txt : str
+           Nazwa pliku z wynikami dla PL2000.
         neu_txt : str
             Nazwa pliku z wynikami dla neu.
         Returns
@@ -520,29 +526,29 @@ class Transformacje:
         
         with open(xyz_txt , "w",  encoding="utf-8") as plik:
             plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z\n")
-            plik.write("-"*70)
+            plik.write("-"*67)
             plik.write(f"\n")
             plik.write(f"|         X          |          Y          |          Z          |")
             plik.write(f"\n")
-            plik.write("-"*70)
+            plik.write("-"*67)
             plik.write(f"\n")
             for x, y, z in zip(X, Y, Z):
                 plik.write(f"|{x}|{y}|{z}|")
                 plik.write(f"\n")
-            plik.write("-"*70)
+            plik.write("-"*67)
             
         with open(flh_txt , "w",  encoding="utf-8") as plik:
             plik.write(f"Zestawienie wyników obliczeń geodezyjnych:  f, l, h\n")
-            plik.write("-"*70)
+            plik.write("-"*67)
             plik.write(f"\n")
             plik.write(f"|          fi         |        lambda       |          h          |")
             plik.write(f"\n")
-            plik.write("-"*70)
+            plik.write("-"*67)
             plik.write(f"\n")
             for  f, l, h in zip(F, L, H):
                 plik.write(f"|     {f}|     {l}|{h}|")
                 plik.write(f"\n")
-            plik.write("-"*70)
+            plik.write("-"*67)
             
         with open(x1992_y1992_txt , "w",  encoding="utf-8") as plik:
             plik.write(f"Zestawienie wyników obliczeń geodezyjnych: x1992, y1992\n")
