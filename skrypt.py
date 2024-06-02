@@ -424,7 +424,7 @@ class Transformacje:
             zz +=1
         return(n, e, u) 
     
-    def wczytanie_pliku_z_zapisem(self, dane, output='dms', xyz_txt = 'wyniki_xyz_flh_x92y92_x20y20.txt', neu_txt= 'wyniki_neu.txt'):
+    def wczytanie_pliku_z_zapisem(self, dane, output='dms', xyz_txt = 'wyniki_xyz.txt', flh_txt = 'wyniki_flh.txt', x1992_y1992_txt = 'wyniki_x1992_y1992.txt', x2000_y2000_txt = 'wyniki_x2000_y2000.txt', neu_txt= 'wyniki_neu.txt'):
         '''
         Funkcja wczytuje plik z Danymi X,Y,Z, a następnie tworzy listę posegregowanych X,Y,Z wykorzystując wyjsciowe dane.
         Następnie funkcja zapisuje wyniki obliczeń (X, Y, Z, f, l, h, x92, y92, x20, y20, neu) tworząc z nich tabele.
@@ -519,18 +519,59 @@ class Transformacje:
             Z[i] = Transformacje.f2s(self, Z[i])
         
         with open(xyz_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z, f, l, h, x1992, y1992, x2000, y2000.\n")
-            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X1992, Y1992, X2000, Y2000) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL1992, PL2000.\n")
-            plik.write("-"*221)
+            plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z\n")
+            plik.write("-"*70)
             plik.write(f"\n")
-            plik.write(f"||          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
+            plik.write(f"|         X          |          Y          |          Z          |")
             plik.write(f"\n")
-            plik.write("-"*221)
+            plik.write("-"*70)
             plik.write(f"\n")
-            for x, y, z, f, l, h, x92, y92, x00, y00 in zip(X, Y, Z, F, L, H, X92, Y92, X00, Y00):
-                plik.write(f"||{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
+            for x, y, z in zip(X, Y, Z):
+                plik.write(f"|{x}|{y}|{z}|")
                 plik.write(f"\n")
-            plik.write("-"*221)
+            plik.write("-"*70)
+            
+        with open(flh_txt , "w",  encoding="utf-8") as plik:
+            plik.write(f"Zestawienie wyników obliczeń geodezyjnych:  f, l, h\n")
+            plik.write("-"*70)
+            plik.write(f"\n")
+            plik.write(f"|          fi         |        lambda       |          h          |")
+            plik.write(f"\n")
+            plik.write("-"*70)
+            plik.write(f"\n")
+            for  f, l, h in zip(F, L, H):
+                plik.write(f"|     {f}|     {l}|{h}|")
+                plik.write(f"\n")
+            plik.write("-"*70)
+            
+        with open(x1992_y1992_txt , "w",  encoding="utf-8") as plik:
+            plik.write(f"Zestawienie wyników obliczeń geodezyjnych: x1992, y1992\n")
+            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X1992, Y1992) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL1992.\n")
+            plik.write("-"*45)
+            plik.write(f"\n")
+            plik.write(f"|        x1992        |        y1992        |")
+            plik.write(f"\n")
+            plik.write("-"*45)
+            plik.write(f"\n")
+            for x92, y92 in zip(X92, Y92):
+                plik.write(f"|{x92}|{y92}|")
+                plik.write(f"\n")
+            plik.write("-"*45)
+        
+        with open(x2000_y2000_txt , "w",  encoding="utf-8") as plik:
+            plik.write(f"Zestawienie wyników obliczeń geodezyjnych:x2000, y2000.\n")
+            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X2000, Y2000) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL2000.\n")
+            plik.write("-"*45)
+            plik.write(f"\n")
+            plik.write(f"|        x2000        |        y2000        |")
+            plik.write(f"\n")
+            plik.write("-"*45)
+            plik.write(f"\n")
+            for x00, y00 in zip(X00, Y00):
+                plik.write(f"|{x00}|{y00}|")
+                plik.write(f"\n")
+            plik.write("-"*45)
+            
         
         with open(neu_txt , "w", encoding="utf-8") as plik1:
             plik1.write(f"Wyniki n, e, u:.\n")
