@@ -752,4 +752,17 @@ if __name__ == "__main__":
     mod =Transformacje("WGS84")
     mod.wczytanie_pliku_z_zapisem("input_file.txt")
   
+    parser = ArgumentParser()
+    parser.add_argument('-m', '--m', type=str, help="Podaj jedną z wskazanych elipsoid: GRS80, WGS84, Krasowski")
+    parser.add_argument('-t', '--t', type=str, help="Podaj nazwe pliku tekstowegoz danymi z rozszerzeniem txt")
+    parser.add_argument('-d', '--d', type=str, help="Podaj forme w jakiej ma sie zapisać fi i lambda: dms , radiany, dec_degree ")
+    parser.add_argument('-flh', '--flh', type=str, help="Podaj nazwe pliku wynikiowego dla xyz_flh_PL1992_PL2000 z rozszerzeniem txt")
+    parser.add_argument('-x92y92', '--x92y92', type=str, help="Podaj nazwe pliku wynikiowego dla neu z rozszerzeniem txt")
+    parser.add_argument('-x20y20', '--x20y20', type=str, help="Podaj nazwe pliku wynikiowego dla xyz_flh_PL1992_PL2000 z rozszerzeniem txt")
+    parser.add_argument('-neu', '--neu', type=str, help="Podaj nazwe pliku wynikiowego dla neu z rozszerzeniem txt")
+    
+    args = parser.parse_args()
+    geo = Transformacje(args.m)
+    geo.wczytanie_pliku_z_zapisem(args.t, args.d, args.flh, args.x92y92, args.x20y20, args.neu)
+    
         
