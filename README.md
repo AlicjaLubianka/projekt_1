@@ -18,7 +18,15 @@ Program napisany jest dla systemu Windows. Został testowany na Windows11.
 **INSTRUKCJA OBSŁUGI**
 
 Program umożliwia przekształcanie współrzędnych geodezyjnych między różnymi układami odniesienia: XYZ na FLH, FLH na XYZ, FLH na układ PL-1992 oraz FLH na układ PL-2000, przy użyciu wcześniej zdefiniowanych elipsoid referencyjnych. Dane wejściowe i wyjściowe programu są obsługiwane w formacie zmiennoprzecinkowym (float).
-Program pozwala na wczytanie współrzędnych z pliku tekstowego (input_file.txt), gdzie dane wejściowe to współrzędne X, Y, Z. Przetwarzanie tych danych generuje cztery pliki wynikowe zawierające odpowiednio współrzędne w układach XYZ, FLH, X1992Y1992 oraz X2000Y2000. Użytkownik ma możliwość wyboru interesującego go rezultatu i otwarcia odpowiedniego pliku tekstowego.
+Program pozwala na wczytanie współrzędnych z pliku tekstowego (input_file.txt), gdzie dane wejściowe to współrzędne X, Y, Z. Przetwarzanie tych danych generuje cztery pliki wynikowe zawierające odpowiednio współrzędne w układach NEU, FLH, X1992Y1992 oraz X2000Y2000. Użytkownik ma możliwość wyboru interesującego go rezultatu i otwarcia odpowiedniego pliku tekstowego.
+
+Program pozwala na wczytanie współrzędnych z pliku tekstowego za pomocą wiersza poleceń. Należy wtedy podać elipsoid, plik z danymi, jednostki pliku wynikowego, nazwy plików wynikowych.
+
+**PRZYKŁAD**
+
+python skrypt.py -m GRS80 -t input_file.txt  -d dms -flh flh123.txt -x92y92 x92y92123.txt -x20y20 x20y20123.txt -neu neu123.txt
+
+Jeśli chcemy przetransformować współrzędne zawarte w pliku tekstowym, wówczas musimy podać elipsoidę (-m GRS80), jego nazwę (-t input_file.txt), jednostkę w pliku wynikowym (-d dms) oraz nazwę plików wyjściowych (-flh flh123.txt -x92y92 x92y92123.txt -x20y20 x20y20123.txt -neu neu123.txt). Ważne jest aby dane w pliku były rozdzielone przecinkiem, a także aby nie zawierał on spacji a współrzędne każdego punktu zaczynały się od nowego wiersza. Separatorem rozwinięcia dziesiętnego liczby powinna być kropka. Należy pamiętać, że plik powinien znajdować się w tym samym folderze roboczym co nasz program.
 
 Sposób wprowadzenia współrzędnych: wprowadzanie ręczne (--input cmd). Aby uzyskać współrzędne przeliczone na wybrany przez nas układ musimy otworzyć w oknie cmd ścieżkę do folderu z naszym plikiem (przykład ścieżki: C:\Users\user\OneDrive\Pulpit\informatyka\projekt1) a następnie wpisać słowo „python” oraz nazwę naszego pliku (w tym przypadku plik: „kalkulator_xyz2reszta.py").
 
