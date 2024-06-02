@@ -2,7 +2,7 @@
 
 **OPIS**
 
-Program umożliwia przeliczenie współrzędnych geodezyjnych między układami BLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry] oraz PL-1992 (współrzędne płaskie) [metry] i PL-2000 (współrzędne płaskie) [metry]. 
+Program umożliwia przeliczenie współrzędnych geodezyjnych między układami FLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry] oraz PL-1992 (współrzędne płaskie) [metry] i PL-2000 (współrzędne płaskie) [metry]. 
 
 Przeliczenia są możliwe tylko dla elipsoid: [GRS80, WGS84, elipsoida Krasowskiego].
 
@@ -22,7 +22,7 @@ Program pozwala na wczytanie współrzędnych z pliku tekstowego (input_file.txt
 
 Sposób wprowadzenia współrzędnych: wprowadzanie ręczne (--input cmd). Aby uzyskać współrzędne przeliczone na wybrany przez nas układ musimy otworzyć w oknie cmd ścieżkę do folderu z naszym plikiem (przykład ścieżki: C:\Users\user\OneDrive\Pulpit\informatyka\projekt1) a następnie wpisać słowo „python” oraz nazwę naszego pliku (w tym przypadku plik: „kalkulator_xyz2reszta.py").
 
-W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach) dla transformacji BLH -> XYZ, BLH -> PL1992 oraz BLH -> PL2000.
+W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach) dla transformacji FLH -> XYZ, FLH -> PL1992 oraz FLH -> PL2000.
 
 **PRZYKŁAD**
 
