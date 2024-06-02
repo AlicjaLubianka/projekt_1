@@ -2,7 +2,7 @@
 
 **OPIS**
 
-Program umożliwia przeliczenie współrzędnych geodezyjnych między układami BLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry] oraz PL-1992 (współrzędne płaskie) [metry] i PL-2000 (współrzędne płaskie) [metry]. 
+Program umożliwia przeliczenie współrzędnych geodezyjnych między układami FLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry] oraz PL-1992 (współrzędne płaskie) [metry] i PL-2000 (współrzędne płaskie) [metry]. 
 
 Przeliczenia są możliwe tylko dla elipsoid: [GRS80, WGS84, elipsoida Krasowskiego].
 
@@ -17,14 +17,12 @@ Program napisany jest dla systemu Windows. Został testowany na Windows11.
 
 **INSTRUKCJA OBSŁUGI**
 
-Program umożliwia  transformację FLH -> XYZ, FLH->PL1992, FLH->PL2000 dla wcześniej podanych elipsoid. Dane wejściowe i wyjściowe programu są obsługiwane w formacie zmiennoprzecinkowym (float).
-
-
-Nasz program wykonuje transformację z BLH na XYZ, PL1992 oraz PL2000 za pomocą pojedynczej komendy. Po zakończeniu tej komendy wyświetlane są jednocześnie wyniki wszystkich tych transformacji.
+Program umożliwia przekształcanie współrzędnych geodezyjnych między różnymi układami odniesienia: XYZ na FLH, FLH na XYZ, FLH na układ PL-1992 oraz FLH na układ PL-2000, przy użyciu wcześniej zdefiniowanych elipsoid referencyjnych. Dane wejściowe i wyjściowe programu są obsługiwane w formacie zmiennoprzecinkowym (float).
+Program pozwala na wczytanie współrzędnych z pliku tekstowego (input_file.txt), gdzie dane wejściowe to współrzędne X, Y, Z. Przetwarzanie tych danych generuje cztery pliki wynikowe zawierające odpowiednio współrzędne w układach XYZ, FLH, X1992Y1992 oraz X2000Y2000. Użytkownik ma możliwość wyboru interesującego go rezultatu i otwarcia odpowiedniego pliku tekstowego.
 
 Sposób wprowadzenia współrzędnych: wprowadzanie ręczne (--input cmd). Aby uzyskać współrzędne przeliczone na wybrany przez nas układ musimy otworzyć w oknie cmd ścieżkę do folderu z naszym plikiem (przykład ścieżki: C:\Users\user\OneDrive\Pulpit\informatyka\projekt1) a następnie wpisać słowo „python” oraz nazwę naszego pliku (w tym przypadku plik: „kalkulator_xyz2reszta.py").
 
-W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach) dla transformacji BLH -> XYZ, BLH -> PL1992 oraz BLH -> PL2000.
+W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach) dla transformacji FLH -> XYZ, FLH -> PL1992 oraz FLH -> PL2000.
 
 **PRZYKŁAD**
 
