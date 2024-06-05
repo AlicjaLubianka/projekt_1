@@ -12,6 +12,7 @@ from skrypt import Transformacje
 parser = ArgumentParser()
 parser.add_argument('-m', '--m', type=str, help="Wskaż elipsoidę GRS80, WGS84, Krasowski")
 parser.add_argument('-xyz', '--xyz', type=str, help="Podaj nazwe pliku wynikiowego dla kalkulatora z rozszerzeniem txt")
+parser.add_argument('-trans', '--tra', type=str, help="podaj jaką transforację wybierasz")
 parser.add_argument('-f', '--f', type=float)
 parser.add_argument('-l', '--l', type=float)
 parser.add_argument('-ha', '--ha', type=float)
