@@ -15,8 +15,6 @@ parser = ArgumentParser()
 parser.add_argument('mode', choices=['hirvonen', 'FLH2XYZ', 'flh2PL1992','xyz2neu', 'flh2PL2000'], help="Wybierz tryb 'hirvonen' lub 'FLH2XYZ'")
 parser.add_argument('-m', '--m', type=str, help="Wskaż elipsoidę GRS80, WGS84, Krasowski")
 
-
-
 group_a = parser.add_argument_group('hirvonen', 'Argumenty dla trybu hirvonen')
 group_a.add_argument('-x', type=float, help="Argument x dla trybu hirvonen")
 group_a.add_argument('-y', type=float, help="Argument y dla trybu hirvonen")
