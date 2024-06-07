@@ -2,7 +2,7 @@
 
 **OPIS**
 
-Program umożliwia przeliczenie współrzędnych geodezyjnych między układami FLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry] oraz PL-1992 (współrzędne płaskie) [metry] i PL-2000 (współrzędne płaskie) [metry]. 
+Program umożliwia przeliczenie współrzędnych geodezyjnych między układami FLH (współrzędne geodezyjne), XYZ (współrzędne ortokartezjańskie) [metry], PL-1992 (współrzędne płaskie) [metry], PL-2000 (współrzędne płaskie) [metry] oraz NEU (topocentryczne) [metry]. 
 
 Przeliczenia są możliwe tylko dla elipsoid: [GRS80, WGS84, elipsoida Krasowskiego].
 
@@ -17,54 +17,34 @@ Program napisany jest dla systemu Windows. Został testowany na Windows11.
 
 **INSTRUKCJA OBSŁUGI**
 
-Program umożliwia przekształcanie współrzędnych geodezyjnych między różnymi układami odniesienia: XYZ na FLH, FLH na XYZ, FLH na układ PL-1992 oraz FLH na układ PL-2000, przy użyciu wcześniej zdefiniowanych elipsoid referencyjnych. Dane wejściowe i wyjściowe programu są obsługiwane w formacie zmiennoprzecinkowym (float).
-Program pozwala na wczytanie współrzędnych z pliku tekstowego (input_file.txt), gdzie dane wejściowe to współrzędne X, Y, Z. Przetwarzanie tych danych generuje cztery pliki wynikowe zawierające odpowiednio współrzędne w układach NEU, FLH, X1992Y1992 oraz X2000Y2000. Użytkownik ma możliwość wyboru interesującego go rezultatu i otwarcia odpowiedniego pliku tekstowego.
+Program umożliwia przekształcanie współrzędnych geodezyjnych między różnymi układami odniesienia: XYZ na FLH (hirvonen), FLH na XYZ, XYZ na NEU FLH na układ PL-1992 oraz FLH na układ PL-2000, przy użyciu wcześniej zdefiniowanych elipsoid referencyjnych.
 
-Program pozwala na wczytanie współrzędnych z pliku tekstowego za pomocą wiersza poleceń. Należy wtedy podać elipsoid, plik z danymi, jednostki pliku wynikowego, nazwy plików wynikowych.
+1. Program operuje w terminalu i korzysta z podawania określonych flag. Każde użycie rozpoczyna się od wpisania polecenia python, a następnie nazwy pliku programu - skrypt.py:
 
-**PRZYKŁAD**
+        python skrypt.py
+   
+3. Następnie użytkownik podaje flagę "-i", która umożliwia pobrać dane z pliku wejściowego zawierającego współrzędne do przekształcenia.
 
-python skrypt.py -m GRS80 -t input_file.txt  -d dms -flh flh123.txt -x92y92 x92y92123.txt -x20y20 x20y20123.txt -neu neu123.txt
+       python skrypt.py -i input_file
+   
+5. Kolejno należy użyć flagi "-t", która umożliwia wybór transformacji, którą chcemy dokonać.
 
-Jeśli chcemy przetransformować współrzędne zawarte w pliku tekstowym, wówczas musimy podać elipsoidę (-m GRS80), jego nazwę (-t input_file.txt), jednostkę w pliku wynikowym (-d dms) oraz nazwę plików wyjściowych (-flh flh123.txt -x92y92 x92y92123.txt -x20y20 x20y20123.txt -neu neu123.txt). Ważne jest aby dane w pliku były rozdzielone przecinkiem, a także aby nie zawierał on spacji a współrzędne każdego punktu zaczynały się od nowego wiersza. Separatorem rozwinięcia dziesiętnego liczby powinna być kropka. Należy pamiętać, że plik powinien znajdować się w tym samym folderze roboczym co nasz program.
+   
+- transformacja ze współrzędnych X,Y,Z do współrzędnych fi, lambda, wysokość(hirvonen):
+        python skrypt.py -i input_file -t hirvonen
+- transformacja ze współrzędnych fi, lambda, wysokość do wspołrzędnych X,Y,Z:
+        python skrypt.py -i input_file -t flh2XYZ
+- transformacja ze współrzędnych fi, lambda do układu PL1992:
+        python skrypt.py -i input_file -t flh2PL1992
+- transformacja ze współrzędnych fi, lambda do układu PL2000:
+       python skrypt.py -i input_file -t flh2PL2000
+- transformacja ze współrzędnych X,Y,Z do układu N,E,U
+        python skrypt.py -i input_file -t xyz2neu
 
-Sposób wprowadzenia współrzędnych: wprowadzanie ręczne (--input cmd). Aby uzyskać współrzędne przeliczone na wybrany przez nas układ musimy otworzyć w oknie cmd ścieżkę do folderu z naszym plikiem (przykład ścieżki: C:\Users\user\OneDrive\Pulpit\informatyka\projekt1) a następnie wpisać słowo „python” oraz nazwę naszego pliku (w tym przypadku plik: „kalkulator_xyz2reszta.py").
 
-W następnym kroku, kontynuując zapis w tej samej linijce możemy wpisywać współrzędne FLH (wartości F oraz L wprowadzamy w stopniach dziesiętnych, natomiast H w metrach) dla transformacji FLH -> XYZ, FLH -> PL1992 oraz FLH -> PL2000.
+Dane wejściowe i wyjściowe programu są obsługiwane w formacie zmiennoprzecinkowym (float).
 
-**PRZYKŁAD**
 
-Mamy także możliwość wyboru układu wprowadzanych przez nas współrzędnych, docelowego układu do którego chcemy przeliczyć nasze współrzędne oraz wyboru elipsoidy (spośród trzech wyżej wymienionych), a także wybrania pliku docelowego, do którego chcemy zapisać otrzymane wyniki.
-
-- [-m] - [GRS80, WGS84, Krasowski] - wybranie modelu elipsoidy.
-  
-- [-xyz] - [Nazwapliku.rozszerzenie] - wybranie nazwy i rozszerzenia pliku - tak zostanie zapisany plik wynikowy.
-  
-- [-f, -l, -ha] - [stopnie dziesietne] - współrzędne geodezyjne elipsoidalne punktu, wysokość [metry].
-  
-- [-output] - [dms/dec_degree/radiany] - wybieramy w jakich jednostkach chcemy mieć wyniki.
-
-Przykład:
-
-python kalkulator_xyz2reszta.py -m GRS80 -xyz wyniki.txt -f 40 -l 50 -ha 54 -output dms
-
-Wyniki: 
-
-Współrzędne ortokartezjańskie geocentryczne [metry], współrzędne płaskie PL1992 [metry], współrzędne płaskie PL2000 [metry]. [x, y, z, h, x1992, y1992, x2000, y2000].
-
-Otrzymujemy:
-
-Elipsoida: GRS80
-
-Wyniki dla transformacji flh2xyz: X = 3144998.413 [m], Y = 3748063.157 [m], Z = 4078020.283 [m]
-
-Wyniki z transformacji flh2PL92 i flh2PL20: X1992 =  '-'  [m], Y1992 =  '-'  [m], X2000 =  '-'  [m], Y2000 =  '-'  [m]
-
-To położenie nie jest obsługiwane przez układy współrzędnych płaskich PL1992 i PL2000
-
-Nazwa pliku głównego: skrypt
-
-Nasze wyniki zapisują się w pliku o nazwie "wyniki.txt".
 
 **ZNANE BŁĘDY I NIETYPOWE ZACHOWANIA**
 
