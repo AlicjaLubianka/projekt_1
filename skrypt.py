@@ -2,6 +2,7 @@ import numpy as np
 from argparse import ArgumentParser
 import os as os
 import tkinter as tk
+import argparse
 
 
 class Transformacje:
@@ -310,459 +311,79 @@ class Transformacje:
         return(x00,y00)
     
         
-    def dXYZ(self, xa, ya, za, xb, yb, zb):
+
         
-        """
-        Definicja ta oblicza macierz różnicy współrzędnych punktów A i B, która jest wymagana do wyliczenia macierzy neu
-    
-        Parameters
-        ----------
-        xa : FLOAT
-            współrzędna w układzie ortokartezjańskim
-        ya : FLOAT
-            współrzędna w układzie ortokartezjańskim
-        za : FLOAT
-            współrzędna w układzie ortokartezjańskim
-        xb : FLOAT
-            współrzędna w układzie ortokartezjańskim
-        yb : FLOAT
-            współrzędna w układzie ortokartezjańskim
-        zb : FLOAT
-            współrzędna w układzie ortokartezjańskim
-    
-        Returns
-        -------
-        dXYZ : ARRAY
-            macierz różnicy współrzędnych
-    
-        """
-    
-        dXYZ = np.array([xb-xa, yb-ya, zb-za])
-        return(dXYZ)
-        
-        
-    def Rneu(self, f, l):
-        """
-        Definicja ta tworzy macierz obrotu R, która wymagana jest do wyliczenia macierzy neu.
-    
-        Parameters
-        ----------
-        f : FLOAT
-            [stopnie dziesiętne] - szerokość geodezyjna.
-        l : FLOAT
-            [stopnie dziesiętne] - długość geodezyjna.
-    
-        Returns
-        -------
-        R ARRAY
-            macierz obrotu R
-    
-        """
-        f=np.radians(f)
-        l=np.radians(l)
-        R = np.array([[-np.sin(f)*np.cos(l), -np.sin(l), np.cos(f)*np.cos(l)],
-                      [-np.sin(f)*np.sin(l),  np.cos(l), np.cos(f)*np.sin(l)],
-                      [np.cos(f),             0,         np.sin(f)          ]])
-        return(R)
-        
-        
-    def xyz2neu(self, f, l, xa, ya, za, xb, yb, zb):
-        
-        """
-        Algorytm służy do przeliczania współrzednych ortokartezjańskich do układu współrzędnych horyzontalnych.
-        Układ współrzędnych horyzontalnych (neu), to układ wsp. astronomicznych, w którym główna oś to lokalny 
-        kierunek pionu, a płaszczyzna podstawowa to płaszczyzna horyzontu astronomicznego. Zenit i nadir to bieguny układu.
-        Ich położenie na sferze niebieskiej zależy od wsp geograficznych położenia obserwatora oraz momentu obserwacji 
-        przez niego. Układ współrzędnych horyzontalnych to opis wyłącznie chwilowego położenia ciała.
-    
-        Parameters
-        ----------
-        f : FLOAT
-            [stopnie dziesiętne] - szerokość geodezyjna.
-        l : FLOAT
-            [stopnie dziesiętne] - długość geodezyjna.
-        xa : FLOAT 
-            współrzędna w układzie ortokartezjańskim.
-        ya : FLOAT 
-            współrzędna w układzie ortokartezjańskim.
-        za : FLOAT 
-            współrzędna w układzie ortokartezjańskim.
-        xb : FLOAT 
-            współrzędna w układzie ortokartezjańskim.
-        yb : FLOAT 
-            współrzędna w układzie ortokartezjańskim.
-        zb : FLOAT 
-            współrzędna w układzie ortokartezjańskim.
-    
-        Returns
-        -------
-        n , e, u : STR
-            współrzędne horyzontalne
-    
-        """
-                  
-        dX = Transformacje.dXYZ(self, xa, ya, za, xb, yb, zb)
-        R = Transformacje.Rneu(self, f,l)
-        neu = R.T @ dX
-        n = neu[0];   e = neu[1];   u = neu[2]
-        n = "%.16f"%n; e = "%.16f"%e; u="%.16f"%u
-        dlugosc = []
-        xx = len(n); dlugosc.append(xx)
-        yy = len(e); dlugosc.append(yy)
-        zz = len(u); dlugosc.append(zz)
-        P = 50
-        
-        while xx < P:
-            n = str(" ") + n
-            xx += 1
-        while yy < P:
-            e = str(" ") + e
-            yy += 1
-                    
-        while zz < P:
-            u = str(" ") + u
-            zz +=1
-        return(n, e, u) 
-    
-    def wczytanie_pliku_z_zapisem(self, dane, output='dms', xyz_txt = 'wyniki_xyz.txt', flh_txt = 'wyniki_flh.txt', x1992_y1992_txt = 'wyniki_x1992_y1992.txt', x2000_y2000_txt = 'wyniki_x2000_y2000.txt', neu_txt= 'wyniki_neu.txt'):
-        '''
-        Funkcja wczytuje plik z Danymi X,Y,Z, a następnie tworzy listę posegregowanych X,Y,Z wykorzystując wyjsciowe dane.
-        Następnie funkcja zapisuje wyniki obliczeń XYZ,FLH, X1992_Y1992, X2000_Y2000 tworząc z nich tabele w różnych plikach tekstowych.
+    def xyz2neu(self, xa, ya, za, xb, yb, zb):
+        dX = xb - xa
+        dY = yb - ya
+        dZ = zb - za
 
-        Parameters
-        ----------
-        dane : TYPE
-            DESCRIPTION.
-        output : str
-            Sposób, w którym funkcja ma zapisywać współrzęde f oraz l [dms, radiany, dec_degree]. 
-        xyz_txt : str
-           Nazwa pliku z wynikami dla xyz.
-        flh_txt : str
-           Nazwa pliku z wynikami dla flh.
-        x1992_y1992_txt : str
-           Nazwa pliku z wynikami dla PL1992.    
-        x2000_y2000_txt : str
-           Nazwa pliku z wynikami dla PL2000.
-        neu_txt : str
-            Nazwa pliku z wynikami dla neu.
-        Returns
-        -------
-        Plik txt
+        fi, lam, _ = self.hirvonen(xa, ya, za, output='radiany')
 
-        '''
-        with open(dane, "r") as plik:
-            tab=np.genfromtxt(plik, delimiter=",", dtype = '<U20', skip_header = 4)
-            X=[]
-            Y=[]
-            Z=[]
-            for i in tab:
-                x=i[0]
-                X.append(float(x))
-                y=i[1]
-                Y.append(float(y))
-                z=i[2]
-                Z.append(float(z))
-            ilosc_wierszy = len(X)
-            F=[]
-            L=[]
-            H=[]
-            X92=[]
-            Y92=[]
-            X00=[]
-            Y00=[]
-            N=[]
-            E=[]
-            U=[]    
-        for x,y,z in zip (X,Y,Z):
-            f,l,h = Transformacje.hirvonen(self, x, y, z, output = output)
-            if output == "dms":
-                F.append(f)
-                L.append(l)
-            elif output == "radiany":
-                f=Transformacje.f2s_rad(self,f)
-                l=Transformacje.f2s_rad(self,l)
-                F.append(f)
-                L.append(l)
-            else:
-                f=Transformacje.f2s_fl(self,f)
-                l=Transformacje.f2s_fl(self,l)
-                F.append(f)
-                L.append(l)
-            H.append(Transformacje.f2s(self, h))
-            f,l,h = Transformacje.hirvonen(self, x, y, z)
-            
-            if l >= 13.5 and l <= 25.5 and f <= 55.0 and f >= 48.9:
-                x92, y92 = Transformacje.flh2PL1992(self, f,l)
-                X92.append(Transformacje.f2s(self, x92))
-                Y92.append(Transformacje.f2s(self, y92))
-                x00, y00 = Transformacje.flh2PL2000(self, f,l)
-                X00.append(Transformacje.f2s(self, x00))
-                Y00.append(Transformacje.f2s(self, y00))
-            else:
-                x92 = "         '-'         " ; X92.append(x92)
-                y92 = "         '-'         " ; Y92.append(y92)
-                x00 = "         '-'         " ; X00.append(x00)
-                y00 = "         '-'         " ; Y00.append(y00)
-                
-        f1, l1, h1 = Transformacje.hirvonen(self, X[0], Y[0], Z[0])
-        n1, e1, u1 = Transformacje.xyz2neu(self, f1, l1, X[0], Y[0], Z[0], X[-1], Y[-1], Z[-1])
-        N.append(n1)
-        E.append(e1)
-        U.append(u1)
-        
-        i=0
-        while i<(ilosc_wierszy-1):
-            f, l, h = Transformacje.hirvonen(self, X[i], Y[i], Z[i])
-            n, e, u = Transformacje.xyz2neu(self, f, l, X[i], Y[i], Z[i], X[i+1], Y[i+1], Z[i+1])
-            N.append(n)
-            E.append(e)
-            U.append(u)
-            i+=1 
-            
-        for i in range(len(X)):
-            X[i] = Transformacje.f2s(self, X[i])
-            Y[i] = Transformacje.f2s(self, Y[i])
-            Z[i] = Transformacje.f2s(self, Z[i])
-        
-        with open(xyz_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z\n")
-            plik.write("-"*67)
-            plik.write(f"\n")
-            plik.write(f"|         X          |          Y          |          Z          |")
-            plik.write(f"\n")
-            plik.write("-"*67)
-            plik.write(f"\n")
-            for x, y, z in zip(X, Y, Z):
-                plik.write(f"|{x}|{y}|{z}|")
-                plik.write(f"\n")
-            plik.write("-"*67)
-            
-        with open(flh_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Zestawienie wyników obliczeń geodezyjnych:  f, l, h\n")
-            plik.write("-"*67)
-            plik.write(f"\n")
-            plik.write(f"|          fi         |        lambda       |          h          |")
-            plik.write(f"\n")
-            plik.write("-"*67)
-            plik.write(f"\n")
-            for  f, l, h in zip(F, L, H):
-                plik.write(f"|     {f}|     {l}|{h}|")
-                plik.write(f"\n")
-            plik.write("-"*67)
-            
-        with open(x1992_y1992_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Zestawienie wyników obliczeń geodezyjnych: x1992, y1992\n")
-            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X1992, Y1992) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL1992.\n")
-            plik.write("-"*45)
-            plik.write(f"\n")
-            plik.write(f"|        x1992        |        y1992        |")
-            plik.write(f"\n")
-            plik.write("-"*45)
-            plik.write(f"\n")
-            for x92, y92 in zip(X92, Y92):
-                plik.write(f"|{x92}|{y92}|")
-                plik.write(f"\n")
-            plik.write("-"*45)
-        
-        with open(x2000_y2000_txt , "w",  encoding="utf-8") as plik:
-            plik.write(f"Zestawienie wyników obliczeń geodezyjnych:x2000, y2000.\n")
-            plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X2000, Y2000) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL2000.\n")
-            plik.write("-"*45)
-            plik.write(f"\n")
-            plik.write(f"|        x2000        |        y2000        |")
-            plik.write(f"\n")
-            plik.write("-"*45)
-            plik.write(f"\n")
-            for x00, y00 in zip(X00, Y00):
-                plik.write(f"|{x00}|{y00}|")
-                plik.write(f"\n")
-            plik.write("-"*45)
-            
-        
-        with open(neu_txt , "w", encoding="utf-8") as plik1:
-            plik1.write(f"Wyniki n, e, u:.\n")
-            plik1.write("-"*154)
-            plik1.write(f"\n")
-            plik1.write(f"|                        n                         |                        e                         |                        u                         |")
-            plik1.write(f"\n")
-            plik1.write("-"*154)
-            plik1.write(f"\n")
-            for n, e, u in zip(N, E, U):
-                plik1.write(f"|{n}|{e}|{u}|")
-                plik1.write(f"\n")
-            plik1.write("-"*154)
-            
-    def f2s_rad(self, liczba):
-        '''
-        Konwertuje liczby zmiennoprzecinkowe [float] na ciągi znaków [string], zachowując precyzję 
-        odpowiednią dla jednostki radianów. Celem jest estetyczne zapisanie wyników w pliku wyjściowym.
+        R = np.array([[-np.sin(fi) * np.cos(lam), -np.sin(lam), np.cos(fi) * np.cos(lam)],
+                      [-np.sin(fi) * np.sin(lam), np.cos(lam), np.cos(fi) * np.sin(lam)],
+                      [np.cos(fi), 0, np.sin(fi)]])
 
-        Parameters
-        ----------
-        liczba : FLOAT
-            Liczba w radianach.
+        neu = R @ np.array([dX, dY, dZ])
+        return tuple(neu)
 
-        Returns
-        -------
-        liczba : STR
-            string z okreloną stała iloscia znaków
+def zapis(input_file, transform, output_file, model):
+    transformacje = Transformacje(model)
+    results = []
 
-        '''
-        zm_liczba = "%.12f"%liczba
-        P = 16
-        xx = len(zm_liczba)
-        while xx < P:
-            zm_liczba = str(" ") + zm_liczba
-            xx += 1
-        return(zm_liczba)  
+    with open(input_file, 'r') as file:
+        for numer_wiersza, wiersz in enumerate(file, 1):
+            wiersz = wiersz.strip()
+            if not wiersz:
+                print(f"Pomijanie pustych linijek {numer_wiersza}.")
+                continue
 
+            try:
+                wspolrzedne = list(map(float, wiersz.split(',')))
+                if transform == "hirvonen":
+                    if len(wspolrzedne) != 3:
+                        print(f"Pominięto wiersz {numer_wiersza}: Oczekiwano 3 wartości, otrzymano {len(wspolrzedne)}.")
+                        continue
+                    result = transformacje.hirvonen(*wspolrzedne)
+                elif transform == "flh2XYZ":
+                    if len(wspolrzedne) != 3:
+                        print(f"Pominięto wiersz {numer_wiersza}: Oczekiwano 3 wartości, otrzymano {len(wspolrzedne)}.")
+                        continue
+                    result = transformacje.flh2XYZ(*wspolrzedne)
+                elif transform == "flh2PL1992":
+                    if len(wspolrzedne) != 2:
+                        print(f"Pominięto wiersz {numer_wiersza}: Oczekiwano 2 wartości, otrzymano {len(wspolrzedne)}.")
+                        continue
+                    result = transformacje.flh2PL1992(*wspolrzedne)
+                elif transform == "flh2PL2000":
+                    if len(wspolrzedne) != 2:
+                        print(f"Pominięto wiersz {numer_wiersza}: Oczekiwano 2 wartości, otrzymano {len(wspolrzedne)}.")
+                        continue
+                    result = transformacje.flh2PL2000(*wspolrzedne)
+                elif transform == "xyz2neu":
+                    if len(wspolrzedne) != 6:
+                        print(f"Pominięto wiersz {numer_wiersza}: Oczekiwano 6 wartości, otrzymano {len(wspolrzedne)}.")
+                        continue
+                    result = transformacje.xyz2neu(*wspolrzedne)
+                else:
+                    raise ValueError(f"Nieznana transformacja: {transform}")
+                results.append(result)
+            except ValueError as e:
+                print(f"Błąd przetwarzania wiersza {numer_wiersza}: {e}")
+
+    with open(output_file, 'w') as file:
+        for result in results:
+            file.write(','.join(map(str, result)) + '\n')
+    print(f'Wyniki zapisane w pliku {output_file}')
     
-    def f2s_fl(self, liczba):
-        '''
-        Przekształca liczby zmiennoprzecinkowe [float] na ciągi znaków [string] z odpowiednią precyzją, 
-        zgodną z formatem stopni dziesiętnych. Cel jest taki, aby wyniki były czytelnie zapisane w pliku wynikowym.
 
-        Parameters
-        ----------
-        liczba : FLOAT
-            Liczba w stopniach dziesiętnych.
-
-        Returns
-        -------
-        liczba : STR
-            string z okreloną stała iloscia znaków
-
-        '''
-        zm_liczba = "%.10f"%liczba
-        P = 16
-        xx = len(zm_liczba)
-        while xx < P:
-            zm_liczba = str(" ") + zm_liczba
-            xx += 1
-        return(zm_liczba)        
-    
-    
-    def f2s(self, liczba):
-        '''
-        Konwersja z liczb zmiennoprzecinkowych [float] na ciągi znaków [string] z dokładnością odpowiadającą 
-        wymogom formatu stopni, minut i sekund (dms). Proces ten ma na celu estetyczne zapisanie 
-        wyników w pliku wyjściowym.
-
-        Parameters
-        ----------
-        liczba : FLOAT
-            Liczba w dms.
-
-        Returns
-        -------
-        liczbe : STR
-            string z okreloną stała ilością znaków
-
-
-        '''
-        zm_liczba = "%.3f"%liczba
-        P = 21
-        xx = len(zm_liczba)
-        while xx < P:
-            zm_liczba = str(" ") + zm_liczba
-            xx += 1
-        return(zm_liczba)
-    
-    def zapis_danych_v2(self, xyz_txt, x, y, z, output = "dms"):
-        '''
-        Generowanie pliku tekstowego z danymi wprowadzanymi do narzędzia Kalkulatora, 
-        które przekształcają te dane na współrzędne geodezyjne w układach PL2000, PL1992, oraz formaty xyz i flh
-
-        Parameters
-        ----------
-        xyz_txt : STR
-            PLIK TXT
-        X, Y, Z : FLOAT
-             [metry] - współrzędne w układzie ortokartezjańskim,
-        f : FLOAT
-             [stopnie dziesiętne] - szerokość geodezyjna.
-        l : FLOAT
-             [stopnie dziesiętne] - długość geodezyjna.
-        h : FLOAT
-             [metry] - wysokość elipsoidalna
-        X1992, Y1992 : FLOAT
-             [metry] - współrzędne w układzie 1992
-        X2000, Y2000 : FLOAT
-             [metry] - współrzędne w układzie 2000
-        output : TYPE, optional
-            DESCRIPTION. The default is "dms".
-
-        Returns
-        -------
-        Plik txt
-
-        '''
-        f,l,h = Transformacje.hirvonen(self, x, y, z, output = output)
-            
-        if output == "dms":
-            f=f
-            l=l
-        elif output == "radiany":
-            f=Transformacje.f2s_rad(self,f)
-            l=Transformacje.f2s_rad(self,l)
-        else:
-            f=Transformacje.f2s_fl(self,f)
-            l=Transformacje.f2s_fl(self,l)
-        h = Transformacje.f2s(self, h)
-        F,L,H = Transformacje.hirvonen(self, x, y, z)
-        
-        if L >= 13.5 and L <= 25.5 and F <= 55.0 and F >= 48.9:
-            x92, y92 = Transformacje.flh2PL1992(self, F,L)
-            x92 = Transformacje.f2s(self, x92)
-            y92 = Transformacje.f2s(self, y92)
-            x00, y00 = Transformacje.flh2PL2000(self, F,L)
-            x00 = Transformacje.f2s(self, x00)
-            y00 = Transformacje.f2s(self, y00)
-        else:
-            x92 = "         '-'         " 
-            y92 = "         '-'         " 
-            x00 = "         '-'         "
-            y00 = "         '-'         "
-        x = Transformacje.f2s(self, x)
-        y = Transformacje.f2s(self, y)
-        z = Transformacje.f2s(self, z)
-        
-        if not os.path.exists(xyz_txt):
-            with open(xyz_txt, "w", encoding="utf-8") as plik:
-                plik.write(f"Zestawienie wyników obliczeń geodezyjnych: X, Y, Z, fi, lambda, h, X1992, Y1992, X2000, Y2000.\n")
-                plik.write(f"Znak '-' w zestawieniu współrzędnych geodezyjnych (X1992, Y1992, X2000, Y2000) oznacza to, że dla podanych X, Y, Z po obliczeniu współrzędnych geodezyjnych fi oraz lambda nie są akceptowalne w standardowych układach współrzędnych geodezyjnych układów PL1992, PL2000.\n")
-                plik.write("-"*221)
-                plik.write(f"\n")
-                plik.write(f"||          X          |          Y          |          Z          |          fi         |        lambda       |          h          |        x1992        |        y1992        |        x2000        |        y2000        |")
-                plik.write(f"\n")
-                plik.write("-"*221)
-                plik.write(f"\n")
-                plik.write(f"||{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
-                plik.write(f"\n")
-                plik.write("-"*221)
-                plik.write(f"\n")
-        else:
-            with open(xyz_txt, "a", encoding="utf-8") as plik:
-                plik.write(f"||{x}|{y}|{z}|     {f}|     {l}|{h}|{x92}|{y92}|{x00}|{y00}|")
-                plik.write(f"\n")
-                plik.write("-"*221)
-                plik.write(f"\n")
-    
 if __name__ == "__main__":
-    mod =Transformacje("WGS84")
-    mod.wczytanie_pliku_z_zapisem("input_file.txt")
-  
     parser = ArgumentParser()
-    parser.add_argument('-m', '--m', type=str, help="Podaj jedną z wskazanych elipsoid: GRS80, WGS84, Krasowski")
-    parser.add_argument('-t', '--t', type=str, help="Podaj nazwe pliku tekstowegoz danymi z rozszerzeniem txt")
-    parser.add_argument('-d', '--d', type=str, help="Podaj forme w jakiej ma sie zapisać fi i lambda: dms , radiany, dec_degree ")
-    parser.add_argument('-flh', '--flh', type=str, help="Podaj nazwe pliku wynikiowego dla xyz_flh_PL1992_PL2000 z rozszerzeniem txt")
-    parser.add_argument('-x92y92', '--x92y92', type=str, help="Podaj nazwe pliku wynikiowego dla neu z rozszerzeniem txt")
-    parser.add_argument('-x20y20', '--x20y20', type=str, help="Podaj nazwe pliku wynikiowego dla xyz_flh_PL1992_PL2000 z rozszerzeniem txt")
-    parser.add_argument('-neu', '--neu', type=str, help="Podaj nazwe pliku wynikiowego dla neu z rozszerzeniem txt")
-    
+    parser.add_argument("-i", dest="input_file", required=True, help="ścieżka do pliku wejściowego")
+    parser.add_argument("-t", dest="transform", required=True, choices=["hirvonen", "flh2XYZ", "flh2PL1992", "flh2PL2000", "xyz2neu"], help="Transformation type")
+    parser.add_argument("-o", dest="output_file", required=True, help="Ścieżka do pliku wyjściowego")
+    parser.add_argument("-m", dest="model", required=True, choices=["WGS84", "Krasowski", "GRS80"], help="model elipsoidy")
+
     args = parser.parse_args()
-    geo = Transformacje(args.m)
-    geo.wczytanie_pliku_z_zapisem(args.t, args.d, args.flh, args.x92y92, args.x20y20, args.neu)
-    
-        
+    zapis(args.input_file, args.transform, args.output_file, args.model)
+
