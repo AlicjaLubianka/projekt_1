@@ -25,42 +25,42 @@ Program umożliwia przekształcanie współrzędnych geodezyjnych między różn
    
 2. Następnie użytkownik podaje flagę "-i", która umożliwia pobrać dane z pliku wejściowego zawierającego współrzędne do przekształcenia.
 
-       python skrypt.py -i input_file
+       python skrypt.py -i input_file.txt
    
 3. Kolejno należy użyć flagi "-t", która umożliwia wybór transformacji, którą chcemy dokonać.
 
    
 - transformacja ze współrzędnych X,Y,Z do współrzędnych fi, lambda, wysokość(hirvonen):
 
-       python skrypt.py -i input_file -t hirvonen
+       python skrypt.py -i input_file,txt -t hirvonen
   
 - transformacja ze współrzędnych fi, lambda, wysokość do wspołrzędnych X,Y,Z:
 
-       python skrypt.py -i input_file -t flh2XYZ
+       python skrypt.py -i input_file.txt -t flh2XYZ
   
 - transformacja ze współrzędnych fi, lambda do układu PL1992:
 
-       python skrypt.py -i input_file -t flh2PL1992
+       python skrypt.py -i input_file.txt -t flh2PL1992
   
 - transformacja ze współrzędnych fi, lambda do układu PL2000:
 
-        python skrypt.py -i input_file -t flh2PL2000
+        python skrypt.py -i input_file.txt -t flh2PL2000
   
 - transformacja ze współrzędnych X,Y,Z do układu NEU:
   
-        python skrypt.py -i input_file -t xyz2neu
+        python skrypt.py -i input_file.txt -t xyz2neu
 
 4. Kolejnym krokiem jest użycie flagi "-o", w której uwzględniamy plik wejściowy o formacie .txt ze współrzędnymi. Plik ten powinien znajdować się na komputerze w folderze z plikiem skrypt.py.
 
-        python skrypt.py -i input_file -t flh2PL1992 -o output_file.tx
+        python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.tx
 
 5. Na koniec użytkownik jest proszony o podanie powierzchni odniesienia za pomocą flagi "-m" - do wyboru są: elipsoida WGS84, GRS80 i Krasowskiego.
 
-        python skrypt.py -i input_file -t flh2PL1992 -o output_file.txt -m GRS80
+        python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.txt -m GRS80
 
-        python skrypt.py -i input_file -t flh2PL1992 -o output_file.txt -m WRS84
+        python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.txt -m WRS84
 
-        python skrypt.py -i input_file -t flh2PL1992 -o output_file.txt -m Krasowski
+        python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.txt -m Krasowski
 
 UWAGA!
 Aby przeprowadzić transformację xyz2neu, należy podać współrzędne orto-kartezjańskie punktu referencyjnego (xa, ya, za) oraz punktu, który ma zostać przekształcony (xb, yb, zb). Format pliku tekstowego powinien wyglądać następująco:
