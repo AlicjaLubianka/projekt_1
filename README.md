@@ -32,7 +32,7 @@ Program umożliwia przekształcanie współrzędnych geodezyjnych między różn
    
 - transformacja ze współrzędnych X,Y,Z do współrzędnych fi, lambda, wysokość(hirvonen):
 
-       python skrypt.py -i input_file,txt -t hirvonen
+       python skrypt.py -i input_file.txt -t hirvonen
   
 - transformacja ze współrzędnych fi, lambda, wysokość do wspołrzędnych X,Y,Z:
 
@@ -52,7 +52,7 @@ Program umożliwia przekształcanie współrzędnych geodezyjnych między różn
 
 4. Kolejnym krokiem jest użycie flagi "-o", w której uwzględniamy plik wejściowy o formacie .txt ze współrzędnymi. Plik ten powinien znajdować się na komputerze w folderze z plikiem skrypt.py.
 
-        python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.tx
+        python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.txt
 
 5. Na koniec użytkownik jest proszony o podanie powierzchni odniesienia za pomocą flagi "-m" - do wyboru są: elipsoida WGS84, GRS80 i Krasowskiego.
 
