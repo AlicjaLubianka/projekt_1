@@ -50,7 +50,7 @@ Program umożliwia przekształcanie współrzędnych geodezyjnych między różn
   
         python skrypt.py -i input_file.txt -t xyz2neu
 
-4. Kolejnym krokiem jest użycie flagi "-o", w której uwzględniamy plik wejściowy o formacie .txt ze współrzędnymi. Plik ten powinien znajdować się na komputerze w folderze z plikiem skrypt.py.
+4. Kolejnym krokiem jest użycie flagi "-o", w której należy podać nazwę pliku wyjściowego, w którym chcemy, aby znajdowały się końcowe wyniki.
 
         python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.txt
 
@@ -63,9 +63,7 @@ Program umożliwia przekształcanie współrzędnych geodezyjnych między różn
         python skrypt.py -i input_file.txt -t flh2PL1992 -o output_file.txt -m Krasowski
 
 UWAGA!
-Aby przeprowadzić transformację xyz2neu, należy podać współrzędne orto-kartezjańskie punktu referencyjnego (xa, ya, za) oraz punktu, który ma zostać przekształcony (xb, yb, zb). Format pliku tekstowego powinien wyglądać następująco:
 
-9876543.210,1234567.890,2345678.910,9876544.211,1234568.891,2345679.911
 
 Współrzędne muszą być rozdzielone przecinkami, a plik nie powinien zawierać żadnych innych danych. Aby dodać kolejny punkt do obliczeń, należy umieścić go w nowym wierszu. Zarówno dane wejściowe, jak i wyjściowe programu powinny być w formacie zmiennoprzecinkowym (float).
 
@@ -83,6 +81,10 @@ Przykład danych wejściowych w pliku tekstowym:
 3664940.514,1409153.584,5009571.169
 3664940.515,1409153.595,5009571.169
 3664940.513,1409153.584,5009571.171
+
+Aby przeprowadzić transformację xyz2neu, należy podać współrzędne orto-kartezjańskie punktu referencyjnego (xa, ya, za) oraz punktu, który ma zostać przekształcony (xb, yb, zb). Format pliku tekstowego powinien wyglądać następująco:
+
+9876543.210,1234567.890,2345678.910,9876544.211,1234568.891,2345679.911
 
 W przypadku transformacji FLH na PL-2000 lub PL-1992 należy podać jedynie wartości F i L.
 
